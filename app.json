@@ -1,0 +1,35 @@
+{
+  "name": "TITLE",
+  "description": "",
+  "logo": "",
+  "repository": "https://github.com/vied12/TITLE",
+  "keywords": ["python", "django" ],
+  "scripts": {
+    "postdeploy": null
+  },
+  "env": {
+    "DJANGO_SETTINGS_MODULE": {
+      "value": "settings_heroku"
+    },
+    "IFRAMELY_APIKEY": {
+      "required": true
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "required": true
+    },
+    "AWS_ACCESS_KEY_ID": {
+      "required": true
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
+}

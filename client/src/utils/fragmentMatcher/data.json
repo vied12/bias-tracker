@@ -1,0 +1,272 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "OBJECT",
+        "name": "Query",
+        "possibleTypes": null
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "Node",
+        "possibleTypes": [
+          {
+            "name": "Instrument"
+          },
+          {
+            "name": "Track"
+          },
+          {
+            "name": "Person"
+          },
+          {
+            "name": "Group"
+          },
+          {
+            "name": "Style"
+          },
+          {
+            "name": "Event"
+          },
+          {
+            "name": "Post"
+          }
+        ]
+      },
+      {
+        "kind": "SCALAR",
+        "name": "ID",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "DjangoDebug",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "DjangoDebugSQL",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "String",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Float",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Boolean",
+        "possibleTypes": null
+      },
+      {
+        "kind": "UNION",
+        "name": "EntityUnion",
+        "possibleTypes": [
+          {
+            "name": "Instrument"
+          },
+          {
+            "name": "Style"
+          },
+          {
+            "name": "Group"
+          },
+          {
+            "name": "Person"
+          },
+          {
+            "name": "Track"
+          },
+          {
+            "name": "Event"
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Instrument",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "DateTime",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "TrackConnection",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PageInfo",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "TrackEdge",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Track",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PersonConnection",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PersonEdge",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Person",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Int",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "AuthorWorkAsMembership",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "AuthorWorkAsMembershipRole",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "GroupConnection",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "GroupEdge",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Group",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "BandWorkAsMembership",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "BandWorkAsMembershipRole",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StyleConnection",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StyleEdge",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Style",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "InstrumentConnection",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "InstrumentEdge",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Event",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "EventEventType",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Post",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "PostPostType",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "EntityConnection",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "EntityEdge",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__Schema",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__Type",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "__TypeKind",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__Field",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__InputValue",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__EnumValue",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "__Directive",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "__DirectiveLocation",
+        "possibleTypes": null
+      }
+    ]
+  }
+}

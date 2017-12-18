@@ -1,0 +1,14 @@
+boto3
+dj-database-url
+Django<2
+django-cors-headers
+django-filter
+git+https://github.com/graphql-python/graphene-django.git
+gunicorn
+psycopg2
+requests
+whitenoise
+djangorestframework
+djoser
+markdown
+djangorestframework-jwt
