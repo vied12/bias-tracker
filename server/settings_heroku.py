@@ -1,6 +1,6 @@
 import dj_database_url
+import os
 from settings import *  # noqa
-
 
 DATABASES['default'] =  dj_database_url.config()  # noqa
 
@@ -16,6 +16,12 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = os.environ.get('SENDGRID_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 LOGGING = {
     'version': 1,

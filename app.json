@@ -11,18 +11,19 @@
     "DJANGO_SETTINGS_MODULE": {
       "value": "settings_heroku"
     },
-    "IFRAMELY_APIKEY": {
-      "required": true
-    },
     "AWS_SECRET_ACCESS_KEY": {
       "required": true
     },
     "AWS_ACCESS_KEY_ID": {
       "required": true
-    }
+    },
+    "NODE_PATH": {
+      "required": true
+    },
   },
   "addons": [
     "heroku-postgresql",
+    "sendgrid",
   ],
   "buildpacks": [
     {

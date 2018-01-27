@@ -1,3 +1,3 @@
-export const RANGE_DATES = [1789, 2018]
-export const MAIN_PANEL_LARGE = 0.8
-export const MAIN_PANEL_SMALL = 0.5
+export const SESSION_STORAGE_AFTER_REDIRECT = 'TITLE/go-to-after-redirection'
+export const SESSION_STORAGE_AFTER_LOGIN = 'TITLE/go-to-after-login'
+export const LOCAL_STORAGE_JWT_TOKEN = 'TITLE/token'

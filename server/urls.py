@@ -22,8 +22,9 @@ from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^auth/', include('djoser.urls')),
-    url(r'^auth/', include('djoser.urls.jwt')),
+    url(r'^api/auth/', include('djoser.urls')),
+    url(r'^api/auth/', include('djoser.urls.jwt')),
     url(r'^graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
-    url(r'^', FrontendAppView.as_view()),
+    url(r'^graphql-batch/', csrf_exempt(GraphQLView.as_view(batch=True, schema=schema))),
+    url(r'^', FrontendAppView.as_view(), name='home'),
 ]
