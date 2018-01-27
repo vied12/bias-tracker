@@ -1,9 +1,9 @@
 import { createAction } from 'redux-actions'
 import { post } from 'utils/fetch'
 import apolloClient from 'utils/apolloClient'
-const RESET = 'TITLE/map/RESET'
-const ERROR = 'TITLE/map/ERROR'
-const SET_TOKEN = 'TITLE/map/SET_TOKEN'
+const RESET = 'TITLE/auth/RESET'
+const ERROR = 'TITLE/auth/ERROR'
+const SET_TOKEN = 'TITLE/auth/SET_TOKEN'
 
 const initialState = {
   currentUser: null,

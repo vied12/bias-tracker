@@ -8,8 +8,6 @@ MIDDLEWARE = MIDDLEWARE + [  # noqa
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-HAYSTACK_CONNECTIONS['default']['URL'] = os.environ.get('BONSAI_URL')  # noqa
-
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
