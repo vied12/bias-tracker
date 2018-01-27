@@ -5,6 +5,7 @@ chardet==3.0.4
 dj-database-url==0.4.2
 Django==1.11.9
 django-cors-headers==2.1.0
+django-countries==5.0
 django-filter==1.1.0
 django-templated-mail==1.0.0
 djangorestframework==3.7.7
@@ -12,6 +13,7 @@ djangorestframework-jwt==1.11.0
 djoser==1.1.5
 docutils==0.14
 graphene==2.0.1
+graphene-django==2.0.0
 graphql-core==2.0
 graphql-relay==0.4.5
 gunicorn==19.7.1
@@ -32,4 +34,3 @@ six==1.11.0
 typing==3.6.4
 urllib3==1.22
 whitenoise==3.3.1
-git+https://github.com/graphql-python/graphene-django.git@b54e02c9ba5
