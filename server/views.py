@@ -31,7 +31,7 @@ class FrontendAppView(View):
     @method_decorator(ensure_csrf_cookie)
     def get(self, request, **params):
         return get_template({
-            '__OG_TITLE__': 'TITLE',
+            '__OG_TITLE__': 'BiasTracker',
             '__OG_TYPE__': 'website',
             '__OG_URL__': request.build_absolute_uri(reverse('home')),
         })

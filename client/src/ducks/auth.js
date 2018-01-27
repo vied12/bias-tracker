@@ -4,9 +4,9 @@ import apolloClient from 'utils/apolloClient'
 import { LOCAL_STORAGE_JWT_TOKEN } from 'constantes'
 import Cookies from 'js-cookie'
 
-const RESET = 'TITLE/auth/RESET'
-const ERROR = 'TITLE/auth/ERROR'
-const SET_TOKEN = 'TITLE/auth/SET_TOKEN'
+const RESET = 'BiasTracker/auth/RESET'
+const ERROR = 'BiasTracker/auth/ERROR'
+const SET_TOKEN = 'BiasTracker/auth/SET_TOKEN'
 
 const initialState = {
   loading: true,
