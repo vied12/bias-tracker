@@ -26,7 +26,7 @@ class Text(models.Model):
     created_by = models.ForeignKey(django.contrib.auth.get_user_model(), blank=True, null=True)
     source = models.ForeignKey('Source')
     # data
-    facebook_id = models.TextField()
+    facebook_id = models.CharField(max_length=255)
     created = models.DateTimeField()
     message = models.TextField(null=True)
     link_description = models.TextField(null=True)
@@ -34,4 +34,26 @@ class Text(models.Model):
     link = models.URLField(null=True)
 
     def __str__(self):
-        return '{}'.format(self.message[:50])
+        return '[{}] {}'.format(self.source, (self.message or '')[:50])
+
+    def get_text(self):
+        return ' '.join((_ for _ in (
+            self.message,
+            self.link_name,
+            self.link_description,
+        ) if _))
+
+
+class SentimentReport(models.Model):
+    # meta
+    added = models.DateTimeField(default=timezone.now)
+    updated = models.DateTimeField(auto_now=True)
+    # data
+    text = models.OneToOneField('Text')
+    compound = models.FloatField()
+    neg = models.FloatField()
+    neu = models.FloatField()
+    pos = models.FloatField()
+
+    def __str__(self):
+        return '{}: {}'.format(self.text, self.compound)

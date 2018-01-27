@@ -24,3 +24,20 @@ class TextAdmin(admin.ModelAdmin):
         'link_name',
         'link_description',
     )
+
+
+@admin.register(models.SentimentReport)
+class SentimentReportAdmin(admin.ModelAdmin):
+    raw_id_fields = ('text', )
+    list_display = (
+        'text',
+        'compound',
+        'pos',
+        'neu',
+        'neg',
+    )
+    list_filter = ('text__source__name',)
+    search_fields = (
+        'text__source__name',
+        'text',
+    )
