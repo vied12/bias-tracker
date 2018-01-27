@@ -2,11 +2,6 @@ from django.contrib import admin
 from . import models
 
 
-@admin.register(models.Media)
-class MediaAdmin(admin.ModelAdmin):
-    pass
-
-
 @admin.register(models.Source)
 class SourceAdmin(admin.ModelAdmin):
     pass
@@ -14,4 +9,18 @@ class SourceAdmin(admin.ModelAdmin):
 
 @admin.register(models.Text)
 class TextAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        'source',
+        'added',
+        'created',
+        'message',
+        'link_name',
+    )
+    list_filter = ('source__name',)
+    date_hierarchy = 'created'
+    search_fields = (
+        'source',
+        'message',
+        'link_name',
+        'link_description',
+    )
