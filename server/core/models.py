@@ -10,9 +10,9 @@ class Source(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(django.contrib.auth.get_user_model(), blank=True, null=True)
     # data
-    name = models.CharField(max_length=255)
-    country = CountryField()
-    language = models.CharField(max_length=128, choices=(('fr', 'fr'), ('en', 'en'), ('it', 'it')))
+    name = models.CharField(max_length=255, verbose_name='source name')
+    country = CountryField(db_index=True)
+    language = models.CharField(max_length=128, choices=(('fr', 'fr'), ('en', 'en'), ('it', 'it')), db_index=True)
     facebook_page_id = models.CharField(max_length=255)
 
     def __str__(self):
@@ -25,8 +25,12 @@ class Text(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(django.contrib.auth.get_user_model(), blank=True, null=True)
     source = models.ForeignKey('Source')
+    # tags
+    tags = models.ManyToManyField('tags.Tag')
+    topics = models.ManyToManyField('tags.Topic')
+    entities = models.ManyToManyField('tags.Entity')
     # data
-    facebook_id = models.CharField(max_length=255)
+    facebook_id = models.CharField(max_length=255, db_index=True)
     created = models.DateTimeField()
     message = models.TextField(null=True)
     link_description = models.TextField(null=True)
