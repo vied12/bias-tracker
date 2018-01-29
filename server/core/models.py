@@ -34,7 +34,7 @@ class Text(models.Model):
     message = models.TextField(null=True)
     link_description = models.TextField(null=True)
     link_name = models.TextField(null=True)
-    link = models.URLField(null=True)
+    link = models.URLField(max_length=500, null=True)
 
     def __str__(self):
         return '[{}] {}'.format(self.source, (self.message or '')[:50])
