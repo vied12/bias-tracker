@@ -21,6 +21,7 @@ class EntityAdmin(BaseTag):
     readonly_fields = ('name', 'entity_type')
     list_filter = ('entity_type',)
 
+
 @admin.register(models.Topic)
 class TopicAdmin(BaseTag):
     readonly_fields = ('name',)
