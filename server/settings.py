@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'djoser',
     'graphene_django',
     'django_countries',
+    'django_rq',
 ]
 
 MIDDLEWARE = [
@@ -161,3 +162,13 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 FACEBOOK_APP_ID = os.environ.get('FACEBOOK_APP_ID')
 FACEBOOK_APP_SECRET = os.environ.get('FACEBOOK_APP_SECRET')
 OPEN_CALAIS_KEY = os.environ.get('OPEN_CALAIS_KEY')
+
+RQ_SHOW_ADMIN_LINK = True
+REDIS_CONNECTION = {
+    'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),  # If you're on Heroku
+    'DEFAULT_TIMEOUT': 500,
+}
+RQ_QUEUES = {
+    'default': REDIS_CONNECTION,
+    'high': REDIS_CONNECTION,
+}

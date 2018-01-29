@@ -44,7 +44,7 @@ class TextAdmin(admin.ModelAdmin):
     )
     date_hierarchy = 'created'
     search_fields = (
-        'source',
+        'source__name',
         'message',
         'link_name',
         'link_description',
