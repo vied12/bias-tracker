@@ -172,3 +172,5 @@ RQ_QUEUES = {
     'default': REDIS_CONNECTION,
     'high': REDIS_CONNECTION,
 }
+
+FB_PAGES_TO_FETCH = 15  # one page = 100 items

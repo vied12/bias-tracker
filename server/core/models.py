@@ -28,7 +28,6 @@ class Source(models.Model):
             'name',
             'created_time',
         ]
-        nb_page = 1  # one page = 100 items
         req = requests.get('''
             https://graph.facebook.com/v2.11/oauth/access_token
             ?client_id={}
@@ -50,7 +49,6 @@ class Source(models.Model):
             .format(self.facebook_page_id, fields, access_token)
 
         def fetch_url(url, source, page_counter):
-            print(source, page_counter)
             req = requests.get(url).json()
             for post in req['data']:
                 if not Text.objects.filter(facebook_id=post.get('id')):
@@ -69,7 +67,7 @@ class Source(models.Model):
             if page_counter > 1:
                 fetch_url(req['paging']['next'], source, page_counter - 1)
 
-        fetch_url(first_url, self, nb_page)
+        fetch_url(first_url, self, settings.FB_PAGES_TO_FETCH)
 
 
 class Text(models.Model):

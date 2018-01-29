@@ -4,6 +4,7 @@ from core.models import Text, SentimentReport
 from tags.models import Entity, Topic, Tag
 from django.conf import settings
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import time
 
 sid = SentimentIntensityAnalyzer()
 calais_url = 'https://api.thomsonreuters.com/permid/calais'
@@ -75,3 +76,4 @@ def extract_entities_for_text(text_id):
         for item in array:
             obj, created = model.objects.get_or_create(**item)
             getattr(text, model.text_set.field.attname).add(obj)
+    time.sleep(1)

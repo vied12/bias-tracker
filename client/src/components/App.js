@@ -14,10 +14,7 @@ class App extends Component {
       <Router history={history}>
         <MuiThemeProvider theme={theme}>
           <Layout>
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <Route component={Login} />
-            </Switch>
+            <Switch />
           </Layout>
         </MuiThemeProvider>
       </Router>
@@ -25,4 +22,6 @@ class App extends Component {
   }
 }
 
+// <Route exact path="/" component={Login} />
+// <Route component={Login} />
 export default App

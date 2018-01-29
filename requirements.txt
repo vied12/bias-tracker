@@ -38,3 +38,4 @@ nltk==3.2.5
 django-rq==1.0.1
 redis==2.10.6
 rq==0.10.0
+twython==3.6.0
