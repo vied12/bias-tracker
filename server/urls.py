@@ -28,3 +28,6 @@ urlpatterns = [
     url(r'^graphql-batch/', csrf_exempt(GraphQLView.as_view(batch=True, schema=schema))),
     url(r'^', FrontendAppView.as_view(), name='home'),
 ]
+
+
+admin.site.site_header = 'Bias Tracker'
