@@ -14,8 +14,12 @@ class BaseTag(admin.ModelAdmin):
 
 @admin.register(models.Entity)
 class EntityAdmin(BaseTag):
+    list_display = (
+        'name',
+        'entity_type',
+    )
     readonly_fields = ('name', 'entity_type')
-
+    list_filter = ('entity_type',)
 
 @admin.register(models.Topic)
 class TopicAdmin(BaseTag):
