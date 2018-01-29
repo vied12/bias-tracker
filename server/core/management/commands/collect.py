@@ -10,7 +10,7 @@ fields = [
     'name',
     'created_time',
 ]
-nb_page = 50
+nb_page = 15  # one page = 100 items
 
 
 class Command(BaseCommand):
