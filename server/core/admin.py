@@ -76,6 +76,7 @@ class TextAdmin(admin.ModelAdmin):
 
 @admin.register(models.SentimentReport)
 class SentimentReportAdmin(admin.ModelAdmin):
+    readonly_fields = ('added',)
     raw_id_fields = ('text', )
     list_display = (
         'text',
