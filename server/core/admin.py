@@ -4,7 +4,16 @@ from . import models
 
 @admin.register(models.Source)
 class SourceAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = (
+        'added',
+        'created_by',
+    )
+
+    def save_model(self, request, obj, form, change):
+        user = request.user
+        if not change or not obj.created_by:
+            obj.created_by = user
+        super(SourceAdmin, self).save_model(request, obj, form, change)
 
 
 @admin.register(models.Text)
@@ -14,7 +23,6 @@ class TextAdmin(admin.ModelAdmin):
         'added',
         'created',
         'message',
-        'created_by',
         'link',
         'link_name',
         'link_description',

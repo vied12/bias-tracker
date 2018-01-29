@@ -23,7 +23,6 @@ class Text(models.Model):
     # meta
     added = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey(django.contrib.auth.get_user_model(), blank=True, null=True)
     source = models.ForeignKey('Source')
     # tags
     tags = models.ManyToManyField('tags.Tag')
