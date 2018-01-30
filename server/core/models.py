@@ -2,8 +2,6 @@ from django.db import models
 import django.contrib.auth
 from django.utils import timezone
 from django_countries.fields import CountryField
-from django.conf import settings
-import requests
 
 
 class Source(models.Model):
@@ -19,55 +17,6 @@ class Source(models.Model):
 
     def __str__(self):
         return '{}'.format(self.name)
-
-    def collect_texts(self):
-        fields = [
-            'link',
-            'description',
-            'message',
-            'name',
-            'created_time',
-        ]
-        req = requests.get('''
-            https://graph.facebook.com/v2.11/oauth/access_token
-            ?client_id={}
-            &client_secret={}
-            &grant_type=client_credentials
-        '''.replace(' ', '')
-            .replace('\n', '')
-            .format(
-                settings.FACEBOOK_APP_ID,
-                settings.FACEBOOK_APP_SECRET
-            )
-        )
-        assert req.status_code is 200, req.content
-        access_token = req.json()['access_token']
-        first_url = '''
-            https://graph.facebook.com/v2.11/{}/feed
-            ?pretty=0&fields={}&limit=100&access_token={}
-        '''.replace(' ', '').replace('\n', '') \
-            .format(self.facebook_page_id, fields, access_token)
-
-        def fetch_url(url, source, page_counter):
-            req = requests.get(url).json()
-            for post in req['data']:
-                if not Text.objects.filter(facebook_id=post.get('id')):
-                    text = Text(
-                        source=source,
-                        facebook_id=post.get('id'),
-                        created=post.get('created_time'),
-                        link_description=post.get('description'),
-                        link_name=post.get('name'),
-                        link=post.get('link'),
-                        message=post.get('message'),
-                    )
-                    text.save()
-                else:
-                    return
-            if page_counter > 1:
-                fetch_url(req['paging']['next'], source, page_counter - 1)
-
-        fetch_url(first_url, self, settings.FB_PAGES_TO_FETCH)
 
 
 class Text(models.Model):

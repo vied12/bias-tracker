@@ -6,10 +6,10 @@ from core import jobs
 
 @receiver(post_save, sender=models.Source)
 def post_source_save(sender, instance, **kwargs):
-    jobs.collect_texts_for_source.delay(instance)
+    jobs.collect.delay(instance.pk)
 
 
 @receiver(post_save, sender=models.Text)
 def post_text_save(sender, instance, **kwargs):
-    jobs.extract_entities_for_text.delay(instance.pk)
-    jobs.sentiment_for_text.delay(instance.pk)
+    jobs.tag.delay(instance.pk)
+    jobs.sentiment.delay(instance.pk)

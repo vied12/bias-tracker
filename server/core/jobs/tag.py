@@ -1,33 +1,15 @@
 from django_rq import job
 import requests
-from core.models import Text, SentimentReport
+from core.models import Text
 from tags.models import Entity, Topic, Tag
 from django.conf import settings
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import time
 
-sid = SentimentIntensityAnalyzer()
 calais_url = 'https://api.thomsonreuters.com/permid/calais'
 
 
 @job
-def collect_texts_for_source(source):
-    source.collect_texts()
-
-
-@job
-def sentiment_for_text(text_id):
-    text = Text.objects.get(pk=text_id)
-    body = text.get_text()
-    sentiment = SentimentReport(
-        text=text,
-        **sid.polarity_scores(body),
-    )
-    sentiment.save()
-
-
-@job
-def extract_entities_for_text(text_id):
+def tag(text_id):
     text = Text.objects.get(pk=text_id)
     if text.tags.count() > 0 or text.entities.count() > 0 or text.topics.count() > 0:
         return
