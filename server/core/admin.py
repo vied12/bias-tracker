@@ -8,6 +8,12 @@ class SourceAdmin(admin.ModelAdmin):
         'added',
         'created_by',
     )
+    list_display = (
+        'name',
+        'country',
+        'language',
+        'created_by',
+    )
 
     def save_model(self, request, obj, form, change):
         user = request.user
@@ -26,6 +32,10 @@ class TextAdmin(admin.ModelAdmin):
         'link',
         'link_name',
         'link_description',
+        'is_translated',
+        'original_message',
+        'original_link_name',
+        'original_link_description',
         'facebook_id',
     )
     list_display = (

@@ -24,17 +24,21 @@ class Text(models.Model):
     added = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     source = models.ForeignKey('Source')
+    created = models.DateTimeField()
+    facebook_id = models.CharField(max_length=255, db_index=True)
     # tags
     tags = models.ManyToManyField('tags.Tag')
     topics = models.ManyToManyField('tags.Topic')
     entities = models.ManyToManyField('tags.Entity')
     # data
-    facebook_id = models.CharField(max_length=255, db_index=True)
-    created = models.DateTimeField()
     message = models.TextField(null=True)
     link_description = models.TextField(null=True)
     link_name = models.TextField(null=True)
+    original_message = models.TextField(null=True)
+    original_link_description = models.TextField(null=True)
+    original_link_name = models.TextField(null=True)
     link = models.URLField(max_length=500, null=True)
+    is_translated = models.BooleanField(default=False)
 
     def __str__(self):
         return '[{}] {}'.format(self.source, (self.message or '')[:50])

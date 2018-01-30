@@ -6,7 +6,7 @@ class Command(BaseCommand):
     help = 'Analyse sentiments for all texts'
 
     def handle(self, *args, **options):
-        texts = models.Text.objects.filter(sentimentreport=None)
+        texts = models.Text.objects.filter(sentimentreport=None, is_translated=True)
         for index, text in enumerate(texts):
             print('{}/{}'.format(index, texts.count()))
             jobs.sentiment(text.id)

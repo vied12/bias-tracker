@@ -11,5 +11,6 @@ def post_source_save(sender, instance, **kwargs):
 
 @receiver(post_save, sender=models.Text)
 def post_text_save(sender, instance, **kwargs):
-    jobs.tag.delay(instance.pk)
-    jobs.sentiment.delay(instance.pk)
+    if instance.is_translated:
+        jobs.tag.delay(instance.pk)
+        jobs.sentiment.delay(instance.pk)

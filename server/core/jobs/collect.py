@@ -39,14 +39,25 @@ def collect(source_id):
         req = requests.get(url).json()
         for post in req['data']:
             if not Text.objects.filter(facebook_id=post.get('id')):
+                if source.language == 'en':
+                    content = dict(
+                        link_description=post.get('description'),
+                        link_name=post.get('name'),
+                        message=post.get('message'),
+                        is_translated=True,
+                    )
+                else:
+                    content = dict(
+                        original_link_description=post.get('description'),
+                        original_link_name=post.get('name'),
+                        original_message=post.get('message'),
+                    )
                 text = Text(
                     source=source,
                     facebook_id=post.get('id'),
                     created=post.get('created_time'),
-                    link_description=post.get('description'),
-                    link_name=post.get('name'),
                     link=post.get('link'),
-                    message=post.get('message'),
+                    **content,
                 )
                 text.save()
             else:
