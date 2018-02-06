@@ -14,3 +14,5 @@ def post_text_save(sender, instance, **kwargs):
     if instance.is_translated:
         jobs.tag.delay(instance.pk)
         jobs.sentiment.delay(instance.pk)
+    else:
+        jobs.translate.delay(instance.pk)
