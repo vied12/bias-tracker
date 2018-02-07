@@ -8,9 +8,10 @@ sid = SentimentIntensityAnalyzer()
 @job
 def sentiment(text_id):
     text = Text.objects.get(pk=text_id)
-    body = text.get_text()
-    obj = SentimentReport(
-        text=text,
-        **sid.polarity_scores(body),
-    )
-    obj.save()
+    if text.is_translated and not SentimentReport.objects.filter(text=text).exists():
+        body = text.get_text()
+        obj = SentimentReport(
+            text=text,
+            **sid.polarity_scores(body),
+        )
+        obj.save()
