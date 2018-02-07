@@ -9,8 +9,10 @@ import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import countrynames from 'country-list'
 import EntityDetails from 'components/EntityDetails'
+import { Link } from 'react-router-dom'
 
 const countries = countrynames()
+
 const styles = theme => ({
   root: {
     padding: theme.spacing.unit * 3,
@@ -32,9 +34,13 @@ const Sources = ({ classes, data: { loading, allSources } }) => {
     <div className={classes.root}>
       <Grid container spacing={40}>
         {allSources.edges.map(({ node }) => (
-          <Grid key={node.id} item xs={12} md={3}>
+          <Grid key={node.id} item xs={12} sm={6} md={3} lg={2}>
             <Paper className={classes.paper}>
-              <Button className={classes.sourceTitle}>
+              <Button
+                component={Link}
+                to={`/source/${node.id}`}
+                className={classes.sourceTitle}
+              >
                 <Typography variant="headline">{node.name}</Typography>
               </Button>
               <Typography variant="subheading">
@@ -43,13 +49,9 @@ const Sources = ({ classes, data: { loading, allSources } }) => {
               <Typography variant="caption">{node.textCount} posts</Typography>
               {node.mainEntities.edges.map(({ node: entityNode }) => (
                 <div key={entityNode.id}>
-                  <Button
-                    className={classes.entity}
-                    size="small"
-                    variant="raised"
-                  >
+                  <Typography className={classes.entity}>
                     {entityNode.name}
-                  </Button>
+                  </Typography>
                   <EntityDetails entity={entityNode.id} source={node.id} />
                 </div>
               ))}

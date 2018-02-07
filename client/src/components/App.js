@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import Home from './Home'
-import Layout from './Layout'
+import Home from 'components/PageHome'
+import Layout from 'components/Layout'
+import Source from 'components/PageSource'
 import history from 'utils/history'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import { Router, Route, Switch } from 'react-router-dom'
@@ -17,6 +18,7 @@ class App extends Component {
           <Reboot />
           <Layout>
             <Switch>
+              <Route path="/source/:source" component={Source} />
               <Route exact path="/" component={Home} />
             </Switch>
           </Layout>

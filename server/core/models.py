@@ -16,7 +16,7 @@ class Source(models.Model):
     # meta
     added = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey(django.contrib.auth.get_user_model(), blank=True, null=True)
+    created_by = models.ForeignKey(django.contrib.auth.get_user_model(), models.CASCADE, blank=True, null=True)
     # data
     name = models.CharField(max_length=255, verbose_name='source name')
     country = CountryField(db_index=True)
@@ -32,7 +32,7 @@ class Text(models.Model):
     # meta
     added = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
-    source = models.ForeignKey('Source')
+    source = models.ForeignKey('Source', on_delete=models.CASCADE)
     created = models.DateTimeField()
     facebook_id = models.CharField(max_length=255, db_index=True)
     # tags
@@ -65,7 +65,7 @@ class SentimentReport(models.Model):
     added = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     # data
-    text = models.OneToOneField('Text')
+    text = models.OneToOneField('Text', models.CASCADE)
     compound = models.FloatField()
     neg = models.FloatField()
     neu = models.FloatField()

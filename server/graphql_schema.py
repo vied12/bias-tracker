@@ -33,6 +33,7 @@ class Text(DjangoObjectType):
 
 
 class Entity(DjangoObjectType):
+    count = graphene.Int()
 
     class Meta:
         model = tags.models.Entity

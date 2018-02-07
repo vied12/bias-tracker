@@ -1,5 +1,7 @@
+import React from 'react'
 import red from 'material-ui/colors/red'
 import blue from 'material-ui/colors/blue'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 
 export const mainTheme = {
   typography: {
@@ -43,4 +45,24 @@ export const mainTheme = {
       },
     },
   },
+}
+
+const darkTheme = {
+  ...mainTheme,
+  palette: {
+    ...mainTheme.palette,
+    background: {
+      default: '#333333',
+    },
+    type: 'dark',
+  },
+}
+
+export const withDarkTheme = Component => props => {
+  const theme = createMuiTheme(darkTheme)
+  return (
+    <MuiThemeProvider theme={theme}>
+      <Component {...props} />
+    </MuiThemeProvider>
+  )
 }
