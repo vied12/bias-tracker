@@ -3,6 +3,13 @@ import django.contrib.auth
 from django.utils import timezone
 from django_countries.fields import CountryField
 
+LANGUAGES = (
+    'en',
+    'es',
+    'fr',
+    'it',
+)
+
 
 class Source(models.Model):
     # meta
@@ -12,7 +19,7 @@ class Source(models.Model):
     # data
     name = models.CharField(max_length=255, verbose_name='source name')
     country = CountryField(db_index=True)
-    language = models.CharField(max_length=128, choices=(('fr', 'fr'), ('en', 'en'), ('it', 'it')), db_index=True)
+    language = models.CharField(max_length=128, choices=((_, _) for _ in LANGUAGES), db_index=True)
     facebook_page_id = models.CharField(max_length=255)
 
     def __str__(self):
