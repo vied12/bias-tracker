@@ -4,6 +4,7 @@ from django.utils import timezone
 from django_countries.fields import CountryField
 
 LANGUAGES = (
+    'de',
     'en',
     'es',
     'fr',
