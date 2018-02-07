@@ -10,5 +10,5 @@ class Command(BaseCommand):
         texts = Text.objects.filter(is_translated=True, tags=None, entities=None, topics=None)
         for index, text in enumerate(texts):
             print('{}/{}'.format(index, texts.count()))
-            jobs.tag(text.id)
+            jobs.tag.delay(text.id)
         self.stdout.write(self.style.SUCCESS('done'))
