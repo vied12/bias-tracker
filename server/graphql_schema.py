@@ -1,42 +1,58 @@
-from graphene import relay, ObjectType, Schema, Field
+from graphene import relay, ObjectType, Schema
+import graphene
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
-from django.contrib.auth.models import User
-from graphene_django.rest_framework.mutation import SerializerMutation
-import djoser.serializers
+import core.models
+import tags.models
+from django.db.models import Count
 
 
-class User(DjangoObjectType):
+class Source(DjangoObjectType):
+    text_count = graphene.Int()
+    main_entities = DjangoFilterConnectionField(lambda: Entity)
+
     class Meta:
-        model = User
-        filter_fields = ['username']
+        model = core.models.Source
+        filter_fields = ['name']
+        interfaces = (relay.Node, )
+
+    def resolve_text_count(self, args):
+        return self.text_set.all().count()
+
+    def resolve_main_entities(self, args, **kwargs):
+        return tags.models.Entity.objects.filter(text__source=self) \
+            .annotate(count=Count('text')).filter(count__gt=10).order_by('-count')
+
+
+class Text(DjangoObjectType):
+
+    class Meta:
+        model = core.models.Text
+        filter_fields = ['id', 'entities', 'source']
         interfaces = (relay.Node, )
 
 
-class CreateUserMutation(SerializerMutation):
+class Entity(DjangoObjectType):
+
     class Meta:
-        serializer_class = djoser.serializers.UserCreateSerializer
+        model = tags.models.Entity
+        filter_fields = ['name']
+        interfaces = (relay.Node, )
 
 
-class SetPasswordMutation(SerializerMutation):
+class SentimentReport(DjangoObjectType):
+
     class Meta:
-        serializer_class = djoser.serializers.SetPasswordSerializer
+        model = core.models.SentimentReport
+        filter_fields = []
+        interfaces = (relay.Node, )
 
 
 class Query(ObjectType):
-    user = relay.Node.Field(User)
-    current_user = Field(User)
-    all_users = DjangoFilterConnectionField(User)
-
-    def resolve_current_user(self, args):
-        if not args.context.user.is_authenticated():
-            return None
-        return args.context.user
+    source = relay.Node.Field(Source)
+    all_sources = DjangoFilterConnectionField(Source)
+    all_texts = DjangoFilterConnectionField(Text)
+    # entity = relay.Node.Field(Entity)
 
 
-class Mutation(ObjectType):
-    createUser = CreateUserMutation.Field()
-    setPassword = SetPasswordMutation.Field()
-
-
-schema = Schema(query=Query, mutation=Mutation)
+schema = Schema(query=Query)

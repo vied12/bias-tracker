@@ -5,7 +5,10 @@ import { ApolloLink } from 'apollo-link'
 import { LOCAL_STORAGE_JWT_TOKEN } from 'constantes'
 import { BatchHttpLink } from 'apollo-link-batch-http'
 
-const httpLink = new BatchHttpLink({ uri: '/graphql-batch/' })
+const httpLink = new BatchHttpLink({
+  uri: '/graphql-batch/',
+  batchInterval: 250,
+})
 const middlewareLink = new ApolloLink((operation, forward) => {
   const token = localStorage.getItem(LOCAL_STORAGE_JWT_TOKEN)
   operation.setContext({

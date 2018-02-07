@@ -3,10 +3,17 @@ import compose from 'recompose/compose'
 import { withStyles } from 'material-ui/styles'
 import { withRouter } from 'react-router'
 import classNames from 'classnames'
+import Header from 'components/Header'
 
 const styles = theme => ({})
+
 const Layout = ({ classes, children }) => {
-  return <div className={classNames(classes.root)}>{children}</div>
+  return (
+    <div className={classNames(classes.root)}>
+      <Header />
+      {children}
+    </div>
+  )
 }
 
 export default compose(

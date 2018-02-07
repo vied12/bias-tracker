@@ -6,6 +6,20 @@
   version "2.0.46"
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.46.tgz#f13a6c336a6582b95d0c0269e796b709488fd54d"
 
+"@types/jss@^9.3.0":
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/@types/jss/-/jss-9.3.0.tgz#0f8484fd03ded206917be27b58217f274a0ad59f"
+
+"@types/react-transition-group@^2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-2.0.6.tgz#8903fa2cf540ba454461590bff811a787889617c"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*":
+  version "16.0.36"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.0.36.tgz#ceb5639013bdb92a94147883052e69bb2c22c69b"
+
 "@types/zen-observable@0.5.3", "@types/zen-observable@^0.5.3":
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.5.3.tgz#91b728599544efbb7386d8b6633693a3c2e7ade5"
@@ -1683,6 +1697,10 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
     os-homedir "^1.0.1"
     parse-json "^2.2.0"
     require-from-string "^1.1.0"
+
+country-list@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/country-list/-/country-list-1.1.0.tgz#3ea3608857e17458657d129e1d737e4c2f79775b"
 
 create-ecdh@^4.0.0:
   version "4.0.0"
@@ -4123,6 +4141,10 @@ jss-default-unit@^8.0.0:
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/jss-default-unit/-/jss-default-unit-8.0.1.tgz#be3dc682b871d1a77ab7e2d0a1e66f9fc2d5a4ca"
 
+jss-default-unit@^8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/jss-default-unit/-/jss-default-unit-8.0.2.tgz#cc1e889bae4c0b9419327b314ab1c8e2826890e6"
+
 jss-expand@^5.0.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/jss-expand/-/jss-expand-5.1.0.tgz#b1ad74ec18631f34f65a2124fcfceb6400610e3d"
@@ -4502,9 +4524,11 @@ material-ui-icons@^1.0.0-beta.17:
     recompose "^0.26.0"
 
 material-ui@^1.0.0-beta.20:
-  version "1.0.0-beta.23"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.23.tgz#f3d49359c13b57f893e768de62b81f5e8ad7faa5"
+  version "1.0.0-beta.32"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.32.tgz#d9b5f52b8a978786e9b8217338a5ca35a75bf98e"
   dependencies:
+    "@types/jss" "^9.3.0"
+    "@types/react-transition-group" "^2.0.6"
     babel-runtime "^6.26.0"
     brcast "^3.0.1"
     classnames "^2.2.5"
@@ -4512,13 +4536,17 @@ material-ui@^1.0.0-beta.20:
     dom-helpers "^3.2.1"
     hoist-non-react-statics "^2.3.1"
     jss "^9.3.3"
-    jss-preset-default "^4.0.1"
+    jss-camel-case "^6.0.0"
+    jss-default-unit "^8.0.2"
+    jss-global "^3.0.0"
+    jss-nested "^6.0.1"
+    jss-props-sort "^6.0.0"
+    jss-vendor-prefixer "^7.0.0"
     keycode "^2.1.9"
-    lodash "^4.17.4"
+    lodash "^4.2.0"
     normalize-scroll-left "^0.1.2"
     prop-types "^15.6.0"
     react-event-listener "^0.5.1"
-    react-flow-types "^0.2.0-beta.6"
     react-jss "^8.1.0"
     react-popper "^0.7.4"
     react-scrollbar-size "^2.0.2"
@@ -5746,10 +5774,6 @@ react-event-listener@^0.5.0, react-event-listener@^0.5.1:
     prop-types "^15.6.0"
     warning "^3.0.0"
 
-react-flow-types@^0.2.0-beta.6:
-  version "0.2.0-beta.6"
-  resolved "https://registry.yarnpkg.com/react-flow-types/-/react-flow-types-0.2.0-beta.6.tgz#bf49c8b7864fcd0951b03286c63a80d66ce9fae4"
-
 react-jss@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/react-jss/-/react-jss-8.1.0.tgz#7eefe3d121d31d5650118fc4f6b119e388cd43ba"
@@ -5808,6 +5832,12 @@ react-scrollbar-size@^2.0.2:
     babel-runtime "^6.23.0"
     prop-types "^15.5.10"
     react-event-listener "^0.5.0"
+
+react-sparklines@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/react-sparklines/-/react-sparklines-1.7.0.tgz#9b1d97e8c8610095eeb2ad658d2e1fcf91f91a60"
+  dependencies:
+    prop-types "^15.5.10"
 
 react-transition-group@^2.2.1:
   version "2.2.1"
@@ -6866,6 +6896,14 @@ type-is@~1.6.15:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+typeface-bungee@^0.0.54:
+  version "0.0.54"
+  resolved "https://registry.yarnpkg.com/typeface-bungee/-/typeface-bungee-0.0.54.tgz#21efe7327d35368b84b62db6ef2efec6a63f4899"
+
+typeface-nunito-sans@^0.0.54:
+  version "0.0.54"
+  resolved "https://registry.yarnpkg.com/typeface-nunito-sans/-/typeface-nunito-sans-0.0.54.tgz#d8960f5a9c733d8a0f7509bd9c32e69c20d4d19d"
 
 ua-parser-js@^0.7.9:
   version "0.7.17"

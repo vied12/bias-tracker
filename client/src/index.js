@@ -7,6 +7,8 @@ import configureStore from './store'
 import { Provider } from 'react-redux'
 import { ApolloProvider } from 'react-apollo'
 import apolloClient from 'utils/apolloClient'
+import 'typeface-bungee'
+import 'typeface-nunito-sans'
 
 const store = configureStore()
 

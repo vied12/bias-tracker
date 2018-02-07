@@ -22,6 +22,7 @@ class Source(models.Model):
     country = CountryField(db_index=True)
     language = models.CharField(max_length=128, choices=((_, _) for _ in LANGUAGES), db_index=True)
     facebook_page_id = models.CharField(max_length=255)
+    url = models.URLField('url of the media', null=True)
 
     def __str__(self):
         return '{}'.format(self.name)

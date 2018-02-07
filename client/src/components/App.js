@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import Login from './Login'
+import Home from './Home'
 import Layout from './Layout'
 import history from 'utils/history'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import { Router, Route, Switch } from 'react-router-dom'
 import { mainTheme } from 'theme'
+import Reboot from 'material-ui/Reboot'
 
 const theme = createMuiTheme(mainTheme)
 
@@ -13,8 +14,11 @@ class App extends Component {
     return (
       <Router history={history}>
         <MuiThemeProvider theme={theme}>
+          <Reboot />
           <Layout>
-            <Switch />
+            <Switch>
+              <Route exact path="/" component={Home} />
+            </Switch>
           </Layout>
         </MuiThemeProvider>
       </Router>
@@ -22,6 +26,4 @@ class App extends Component {
   }
 }
 
-// <Route exact path="/" component={Login} />
-// <Route component={Login} />
 export default App
