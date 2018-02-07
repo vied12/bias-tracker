@@ -7,7 +7,7 @@ class Command(BaseCommand):
     help = 'Tag Texts'
 
     def handle(self, *args, **options):
-        texts = Text.objects.filter(is_translated=True)
+        texts = Text.objects.filter(is_translated=True, tags=None, entities=None, topics=None)
         for index, text in enumerate(texts):
             print('{}/{}'.format(index, texts.count()))
             jobs.tag(text.id)
