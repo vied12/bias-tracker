@@ -7,29 +7,25 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "Source",
+        "possibleTypes": null
+      },
+      {
         "kind": "INTERFACE",
         "name": "Node",
         "possibleTypes": [
           {
-            "name": "Instrument"
+            "name": "Source"
           },
           {
-            "name": "Track"
+            "name": "Text"
           },
           {
-            "name": "Person"
+            "name": "Entity"
           },
           {
-            "name": "Group"
-          },
-          {
-            "name": "Style"
-          },
-          {
-            "name": "Event"
-          },
-          {
-            "name": "Post"
+            "name": "SentimentReport"
           }
         ]
       },
@@ -39,13 +35,8 @@
         "possibleTypes": null
       },
       {
-        "kind": "OBJECT",
-        "name": "DjangoDebug",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "DjangoDebugSQL",
+        "kind": "SCALAR",
+        "name": "DateTime",
         "possibleTypes": null
       },
       {
@@ -54,52 +45,18 @@
         "possibleTypes": null
       },
       {
-        "kind": "SCALAR",
-        "name": "Float",
+        "kind": "ENUM",
+        "name": "SourceCountry",
         "possibleTypes": null
       },
       {
-        "kind": "SCALAR",
-        "name": "Boolean",
-        "possibleTypes": null
-      },
-      {
-        "kind": "UNION",
-        "name": "EntityUnion",
-        "possibleTypes": [
-          {
-            "name": "Instrument"
-          },
-          {
-            "name": "Style"
-          },
-          {
-            "name": "Group"
-          },
-          {
-            "name": "Person"
-          },
-          {
-            "name": "Track"
-          },
-          {
-            "name": "Event"
-          }
-        ]
-      },
-      {
-        "kind": "OBJECT",
-        "name": "Instrument",
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "DateTime",
+        "kind": "ENUM",
+        "name": "SourceLanguage",
         "possibleTypes": null
       },
       {
         "kind": "OBJECT",
-        "name": "TrackConnection",
+        "name": "TextConnection",
         "possibleTypes": null
       },
       {
@@ -108,113 +65,18 @@
         "possibleTypes": null
       },
       {
-        "kind": "OBJECT",
-        "name": "TrackEdge",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "Track",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "PersonConnection",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "PersonEdge",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "Person",
-        "possibleTypes": null
-      },
-      {
         "kind": "SCALAR",
-        "name": "Int",
+        "name": "Boolean",
         "possibleTypes": null
       },
       {
         "kind": "OBJECT",
-        "name": "AuthorWorkAsMembership",
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "AuthorWorkAsMembershipRole",
+        "name": "TextEdge",
         "possibleTypes": null
       },
       {
         "kind": "OBJECT",
-        "name": "GroupConnection",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "GroupEdge",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "Group",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "BandWorkAsMembership",
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "BandWorkAsMembershipRole",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "StyleConnection",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "StyleEdge",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "Style",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "InstrumentConnection",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "InstrumentEdge",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "Event",
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "EventEventType",
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "Post",
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "PostPostType",
+        "name": "Text",
         "possibleTypes": null
       },
       {
@@ -225,6 +87,36 @@
       {
         "kind": "OBJECT",
         "name": "EntityEdge",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Entity",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Int",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SentimentReport",
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Float",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SourceConnection",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SourceEdge",
         "possibleTypes": null
       },
       {

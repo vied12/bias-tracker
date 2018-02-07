@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from core.graphql import Query
+from graphql_schema import Query
 import graphene
 import json
 
