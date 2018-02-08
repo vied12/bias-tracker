@@ -14,11 +14,12 @@ const styles = theme => ({
   },
 })
 
-const Score = ({ value, classes }) => {
+const Score = ({ value, classes, ...other }) => {
   return (
     <Typography
       component="span"
       className={value >= 0 ? classes.green : classes.red}
+      {...other}
     >
       {value.toFixed(2)}
     </Typography>

@@ -77,7 +77,7 @@ const FBPostsViewer = ({ classes, sourceData, postsData, onCloseRequest }) => {
         {postsData.allTexts.edges.map(({ node }) => (
           <div className={classes.slide} key={node.id}>
             <Grid container>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={3}>
                 <div>
                   <Typography variant="title" className={classes.title}>
                     Scoring
@@ -93,11 +93,15 @@ const FBPostsViewer = ({ classes, sourceData, postsData, onCloseRequest }) => {
                     </span>
                   </Typography>
                   <Typography>
-                    Total: <Score value={node.sentimentreport.compound} />
+                    Total:
+                    <Score
+                      value={node.sentimentreport.compound}
+                      variant="title"
+                    />
                   </Typography>
                 </div>
                 <Typography variant="title" className={classes.title}>
-                  Entites
+                  Entities
                 </Typography>
                 {node.entities.edges.map(({ node: entityNode }) => (
                   <Typography key={entityNode.id}>{entityNode.name}</Typography>
@@ -109,7 +113,7 @@ const FBPostsViewer = ({ classes, sourceData, postsData, onCloseRequest }) => {
                   <Typography key={tagNode.id}>{tagNode.name}</Typography>
                 ))}
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={9}>
                 <FacebookProvider appId="1496795787104342">
                   <EmbeddedPost
                     href={`https://www.facebook.com/${
