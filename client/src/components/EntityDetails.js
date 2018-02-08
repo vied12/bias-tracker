@@ -4,6 +4,8 @@ import { withStyles } from 'material-ui/styles'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { ResponsiveContainer, BarChart, Bar, Cell } from 'recharts'
+import green from 'material-ui/colors/green'
+import red from 'material-ui/colors/red'
 
 const styles = theme => ({
   root: {
@@ -24,15 +26,9 @@ const EntityDetails = ({
     <div className={classes.root}>
       <ResponsiveContainer height={60}>
         <BarChart data={data} stackOffset="sign">
-          <defs>
-            <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="50%" stopColor="green" stopOpacity={1} />
-              <stop offset="50%" stopColor="red" stopOpacity={1} />
-            </linearGradient>
-          </defs>
           <Bar isAnimationActive={false} type="monotone" dataKey="val">
             {data.map((entry, index) => (
-              <Cell key={index} fill={entry.val > 0 ? 'green' : 'red'} />
+              <Cell key={index} fill={entry.val > 0 ? green[500] : red[500]} />
             ))}
           </Bar>
         </BarChart>
