@@ -4,7 +4,7 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 import core.models
 import tags.models
-from django.db.models import Count
+from django.db.models import Count, Avg
 
 
 class Source(DjangoObjectType):
@@ -21,7 +21,9 @@ class Source(DjangoObjectType):
 
     def resolve_main_entities(self, args, **kwargs):
         return tags.models.Entity.objects.filter(text__source=self) \
-            .annotate(count=Count('text')).filter(count__gt=10).order_by('-count')
+            .annotate(average=Avg('text__sentimentreport__compound')) \
+            .annotate(count=Count('text')) \
+            .filter(count__gt=10).order_by('-count')
 
 
 class Text(DjangoObjectType):
@@ -34,6 +36,7 @@ class Text(DjangoObjectType):
 
 class Entity(DjangoObjectType):
     count = graphene.Int()
+    average = graphene.Float()
 
     class Meta:
         model = tags.models.Entity

@@ -12,6 +12,7 @@ import Slider from 'react-slick'
 import red from 'material-ui/colors/red'
 import green from 'material-ui/colors/green'
 import Loader from 'components/Loader'
+import Score from 'components/Score'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -82,10 +83,7 @@ const FBPostsViewer = ({ classes, sourceData, postsData, onCloseRequest }) => {
                     Scoring
                   </Typography>
                   <Typography>
-                    positive:{' '}
-                    <span className={classes.green}>
-                      {node.sentimentreport.pos}
-                    </span>
+                    positive: <span className={classes.green} />
                   </Typography>
                   <Typography>neutral: {node.sentimentreport.neu}</Typography>
                   <Typography>
@@ -95,16 +93,7 @@ const FBPostsViewer = ({ classes, sourceData, postsData, onCloseRequest }) => {
                     </span>
                   </Typography>
                   <Typography>
-                    Total:{' '}
-                    <span
-                      className={
-                        node.sentimentreport.compound >= 0
-                          ? classes.green
-                          : classes.red
-                      }
-                    >
-                      {node.sentimentreport.compound}
-                    </span>
+                    Total: <Score value={node.sentimentreport.compound} />
                   </Typography>
                 </div>
                 <Typography variant="title" className={classes.title}>
