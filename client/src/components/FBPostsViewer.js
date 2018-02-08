@@ -96,10 +96,10 @@ const FBPostsViewer = ({ classes, sourceData, postsData, onCloseRequest }) => {
                     </span>
                   </Typography>
                   <Typography>
-                    neutral sentiment: {node.sentimentreport.neu}
+                    Neutral sentiment: {node.sentimentreport.neu}
                   </Typography>
                   <Typography>
-                    weak sentiment:{' '}
+                    Weak sentiment:{' '}
                     <span className={classes.red}>
                       {node.sentimentreport.neg}
                     </span>
