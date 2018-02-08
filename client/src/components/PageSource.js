@@ -38,12 +38,13 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
   },
   entity: {
-    display: 'center',
+    textAlign: 'center',
     '&:hover $seeMoreBtn': {
       opacity: 1,
     },
   },
   seeMoreBtn: {
+    marginTop: theme.spacing.unit * 3,
     opacity: 0,
     transition: 'all .25s',
   },
