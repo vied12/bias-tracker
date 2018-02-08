@@ -3,7 +3,7 @@ import compose from 'recompose/compose'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import newspaperImg from 'assets/newspaper.jpg'
-import Sources from 'components/Sources'
+import AllSources from 'components/AllSources'
 
 const styles = theme => ({
   root: {},
@@ -28,7 +28,7 @@ class Source extends Component {
         <div className={classes.hero}>
           <Typography variant="title">Our sources</Typography>
         </div>
-        <Sources />
+        <AllSources />
       </div>
     )
   }

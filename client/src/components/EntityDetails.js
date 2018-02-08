@@ -13,14 +13,14 @@ const styles = theme => ({
 const EntityDetails = ({
   theme,
   classes,
-  data: { loading, allTexts },
+  data: { loading, allSentiments },
   entity,
   source,
 }) => {
-  if (loading || !allTexts) {
+  if (loading || !allSentiments) {
     return null
   }
-  const data = allTexts.edges.map(({ node }) => node.sentimentreport.compound)
+  const data = allSentiments.edges.map(({ node }) => node.compound)
   return (
     <div className={classes.root}>
       <Sparklines data={data} min={-1} max={1}>
@@ -35,15 +35,12 @@ const EntityDetails = ({
 export default compose(
   withStyles(styles, { withTheme: true }),
   graphql(gql`
-    query getAllTextsForEntityDetails($entity: [ID], $source: ID!) {
-      allTexts(entities: $entity, source: $source) {
+    query getReportsForEntityDetails($entity: [ID], $source: ID!) {
+      allSentiments(text_Source: $source, text_Entities: $entity) {
         edges {
           node {
             id
-            sentimentreport {
-              id
-              compound
-            }
+            compound
           }
         }
       }

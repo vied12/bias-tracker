@@ -71,5 +71,8 @@ class SentimentReport(models.Model):
     neu = models.FloatField()
     pos = models.FloatField()
 
+    class Meta:
+        ordering = ('text__created',)
+
     def __str__(self):
         return '{}: {}'.format(self.text, self.compound)

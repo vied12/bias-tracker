@@ -45,7 +45,7 @@ class SentimentReport(DjangoObjectType):
 
     class Meta:
         model = core.models.SentimentReport
-        filter_fields = []
+        filter_fields = ['text__source', 'text__entities']
         interfaces = (relay.Node, )
 
 
@@ -53,6 +53,7 @@ class Query(ObjectType):
     source = relay.Node.Field(Source)
     all_sources = DjangoFilterConnectionField(Source)
     all_texts = DjangoFilterConnectionField(Text)
+    all_sentiments = DjangoFilterConnectionField(SentimentReport)
     # entity = relay.Node.Field(Entity)
 
 
