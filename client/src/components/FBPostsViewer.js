@@ -83,21 +83,26 @@ const FBPostsViewer = ({ classes, sourceData, postsData, onCloseRequest }) => {
                     Scoring
                   </Typography>
                   <Typography>
-                    positive: <span className={classes.green} />
-                  </Typography>
-                  <Typography>neutral: {node.sentimentreport.neu}</Typography>
-                  <Typography>
-                    negative:{' '}
-                    <span className={classes.red}>
-                      {node.sentimentreport.neg}
-                    </span>
-                  </Typography>
-                  <Typography>
-                    Total:
+                    Aggregate score:
                     <Score
                       value={node.sentimentreport.compound}
                       variant="title"
                     />
+                  </Typography>
+                  <Typography>
+                    Strong sentiment:{' '}
+                    <span className={classes.green}>
+                      {node.sentimentreport.pos}
+                    </span>
+                  </Typography>
+                  <Typography>
+                    neutral sentiment: {node.sentimentreport.neu}
+                  </Typography>
+                  <Typography>
+                    weak sentiment:{' '}
+                    <span className={classes.red}>
+                      {node.sentimentreport.neg}
+                    </span>
                   </Typography>
                 </div>
                 <Typography variant="title" className={classes.title}>
