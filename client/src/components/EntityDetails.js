@@ -7,23 +7,25 @@ import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines'
 import SparklineRef from 'components/SparklineRef'
 
 const styles = theme => ({
-  root: {},
+  root: {
+    minHeight: 60,
+  },
 })
 
 const EntityDetails = ({
   theme,
   classes,
-  data: { loading, allSentiments },
+  data: { loading, allSentiments = { edges: [] } },
   entity,
   source,
 }) => {
-  if (loading || !allSentiments) {
-    return null
-  }
+  // if (loading || !allSentiments) {
+  //   return null
+  // }
   const data = allSentiments.edges.map(({ node }) => node.compound)
   return (
     <div className={classes.root}>
-      <Sparklines data={data} min={-1} max={1}>
+      <Sparklines data={data} height={60} min={-1} max={1}>
         <SparklineRef />
         <SparklinesLine color={theme.palette.primary[900]} />
         <SparklinesSpots />
