@@ -3,13 +3,14 @@ import compose from 'recompose/compose'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import Grid from 'material-ui/Grid'
+import Tooltip from 'material-ui/Tooltip'
 import Button from 'material-ui/Button'
 import newspaperImg from 'assets/newspaper.jpg'
-import EntityDetails from 'components/EntityDetails'
+import EntityChart from 'components/EntityChart'
 import FBPostsViewer from 'components/FBPostsViewer'
+import Loader from 'components/Loader'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { CircularProgress } from 'material-ui/Progress'
 import countrynames from 'country-list'
 
 const countries = countrynames()
@@ -35,9 +36,26 @@ const styles = theme => ({
   body: {
     padding: theme.spacing.unit * 3,
   },
-  entityTitle: {
-    paddingTop: theme.spacing.unit * 6,
-    padding: theme.spacing.unit * 3,
+  entity: {
+    display: 'center',
+    '&:hover $seeMoreBtn': {
+      opacity: 1,
+    },
+  },
+  seeMoreBtn: {
+    opacity: 0,
+    transition: 'all .25s',
+  },
+  entityName: {
+    marginTop: theme.spacing.unit * 6,
+    margin: theme.spacing.unit * 3,
+    display: 'inline-block',
+  },
+  viewPosts: {
+    '& > h2': {
+      textAlign: 'center',
+      marginBottom: theme.spacing.unit * 3,
+    },
   },
 })
 
@@ -52,17 +70,7 @@ class Source extends Component {
     const { classes, data: { loading, source } } = this.props
     const { viewPosts } = this.state
     if (loading) {
-      return (
-        <div
-          style={{
-            textAlign: 'center',
-            paddingTop: '40vh',
-            paddingBottom: '10vh',
-          }}
-        >
-          <CircularProgress />
-        </div>
-      )
+      return <Loader />
     }
     return (
       <div className={classes.root}>
@@ -74,23 +82,34 @@ class Source extends Component {
         <div className={classes.body}>
           <Grid container spacing={40}>
             {source.mainEntities.edges.map(({ node: entityNode }) => [
-              <Grid item xs={12} sm={6} md={3} lg={2} key={entityNode.id}>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={3}
+                lg={2}
+                key={entityNode.id}
+                className={classes.entity}
+              >
                 <div>
-                  <Typography className={classes.entityTitle} variant="title">
-                    {entityNode.name}
-                  </Typography>
-                  <Typography>{entityNode.entityType}</Typography>
-                  <Typography>{entityNode.count} occurences</Typography>
-                  <EntityDetails entity={entityNode.id} source={source.id} />
+                  <Tooltip title={entityNode.entityType} placement="top">
+                    <div className={classes.entityName}>
+                      <Typography variant="title">{entityNode.name}</Typography>
+                    </div>
+                  </Tooltip>
+                  <EntityChart entity={entityNode.id} source={source.id} />
                   <Button
+                    variant="raised"
+                    className={classes.seeMoreBtn}
                     onClick={() => this.setState({ viewPosts: entityNode.id })}
                   >
-                    See posts
+                    Show posts
                   </Button>
                 </div>
               </Grid>,
               viewPosts === entityNode.id && (
-                <Grid item xs={12} key="2">
+                <Grid item className={classes.viewPosts} xs={12} key="2">
+                  <Typography variant="title">{entityNode.name}</Typography>
                   <FBPostsViewer
                     source={source.id}
                     entity={entityNode.id}

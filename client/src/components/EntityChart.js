@@ -14,7 +14,7 @@ const styles = theme => ({
   },
 })
 
-const EntityDetails = ({
+const EntityChart = ({
   theme,
   classes,
   data: { loading, allSentiments = { edges: [] } },
@@ -40,7 +40,7 @@ const EntityDetails = ({
 export default compose(
   withStyles(styles, { withTheme: true }),
   graphql(gql`
-    query getReportsForEntityDetails($entity: [ID], $source: ID!) {
+    query getReportsForEntityChart($entity: [ID], $source: ID!) {
       allSentiments(text_Source: $source, text_Entities: $entity) {
         edges {
           node {
@@ -51,4 +51,4 @@ export default compose(
       }
     }
   `)
-)(EntityDetails)
+)(EntityChart)

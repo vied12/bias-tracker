@@ -41,6 +41,14 @@ class Entity(DjangoObjectType):
         interfaces = (relay.Node, )
 
 
+class Tag(DjangoObjectType):
+
+    class Meta:
+        model = tags.models.Tag
+        filter_fields = ['name']
+        interfaces = (relay.Node, )
+
+
 class SentimentReport(DjangoObjectType):
 
     class Meta:

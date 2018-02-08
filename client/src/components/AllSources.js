@@ -8,7 +8,7 @@ import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import countrynames from 'country-list'
-import EntityDetails from 'components/EntityDetails'
+import EntityChart from 'components/EntityChart'
 import { Link } from 'react-router-dom'
 
 const countries = countrynames()
@@ -52,7 +52,7 @@ const Sources = ({ classes, data: { loading, allSources } }) => {
                   <Typography className={classes.entity}>
                     {entityNode.name}
                   </Typography>
-                  <EntityDetails entity={entityNode.id} source={node.id} />
+                  <EntityChart entity={entityNode.id} source={node.id} />
                 </div>
               ))}
             </Paper>
