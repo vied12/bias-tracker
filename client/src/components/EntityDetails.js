@@ -19,9 +19,6 @@ const EntityDetails = ({
   entity,
   source,
 }) => {
-  // if (loading || !allSentiments) {
-  //   return null
-  // }
   const data = allSentiments.edges.map(({ node }) => node.compound)
   return (
     <div className={classes.root}>

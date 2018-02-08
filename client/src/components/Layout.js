@@ -4,6 +4,7 @@ import { withStyles } from 'material-ui/styles'
 import { withRouter } from 'react-router'
 import classNames from 'classnames'
 import Header from 'components/Header'
+import Footer from 'components/Footer'
 
 const styles = theme => ({})
 
@@ -12,6 +13,7 @@ const Layout = ({ classes, children }) => {
     <div className={classNames(classes.root)}>
       <Header />
       {children}
+      <Footer />
     </div>
   )
 }
