@@ -3,12 +3,12 @@ import compose from 'recompose/compose'
 import { withStyles } from 'material-ui/styles'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines'
-import SparklineRef from 'components/SparklineRef'
+import { ResponsiveContainer, BarChart, Bar, Cell } from 'recharts'
 
 const styles = theme => ({
   root: {
     minHeight: 60,
+    width: '100%',
   },
 })
 
@@ -19,14 +19,24 @@ const EntityDetails = ({
   entity,
   source,
 }) => {
-  const data = allSentiments.edges.map(({ node }) => node.compound)
+  const data = allSentiments.edges.map(({ node }) => ({ val: node.compound }))
   return (
     <div className={classes.root}>
-      <Sparklines data={data} height={60} min={-1} max={1}>
-        <SparklineRef />
-        <SparklinesLine color={theme.palette.primary[900]} />
-        <SparklinesSpots />
-      </Sparklines>
+      <ResponsiveContainer height={60}>
+        <BarChart data={data} stackOffset="sign">
+          <defs>
+            <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="50%" stopColor="green" stopOpacity={1} />
+              <stop offset="50%" stopColor="red" stopOpacity={1} />
+            </linearGradient>
+          </defs>
+          <Bar isAnimationActive={false} type="monotone" dataKey="val">
+            {data.map((entry, index) => (
+              <Cell key={index} fill={entry.val > 0 ? 'green' : 'red'} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   )
 }

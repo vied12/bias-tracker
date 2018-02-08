@@ -53,7 +53,13 @@ class Source extends Component {
     const { viewPosts } = this.state
     if (loading) {
       return (
-        <div style={{ textAlign: 'center', paddingTop: '40vh' }}>
+        <div
+          style={{
+            textAlign: 'center',
+            paddingTop: '40vh',
+            paddingBottom: '10vh',
+          }}
+        >
           <CircularProgress />
         </div>
       )
@@ -73,6 +79,7 @@ class Source extends Component {
                   <Typography className={classes.entityTitle} variant="title">
                     {entityNode.name}
                   </Typography>
+                  <Typography>{entityNode.entityType}</Typography>
                   <Typography>{entityNode.count} occurences</Typography>
                   <EntityDetails entity={entityNode.id} source={source.id} />
                   <Button
@@ -113,6 +120,7 @@ export default compose(
               node {
                 id
                 name
+                entityType
                 count
               }
             }
