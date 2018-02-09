@@ -13,6 +13,7 @@ const styles = theme => ({
     // minHeight: '15vh',
     backgroundImage: `url(${newspaperImg})`,
     backgroundSize: 'cover',
+    backgroundAttachment: 'fixed',
     paddingTop: '5vh',
     paddingBottom: '4vh',
     paddingLeft: '5vw',
