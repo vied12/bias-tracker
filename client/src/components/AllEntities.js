@@ -27,7 +27,7 @@ const styles = theme => ({
   entityTitle: {
     position: 'sticky',
     zIndex: 1,
-    top: 64,
+    top: 0,
     textAlign: 'center',
     marginBottom: 20,
     backgroundColor: theme.palette.background.default,

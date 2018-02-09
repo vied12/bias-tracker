@@ -13,9 +13,12 @@ const styles = theme => ({
   intro: {
     backgroundColor: theme.palette.primary[50],
     padding: theme.spacing.unit * 3,
+    '& aside': {
+      fontSize: '1.2rem',
+      marginBottom: theme.spacing.unit * 3,
+    },
     '& > *': {
       maxWidth: 600,
-      fontSize: '1.2rem',
       margin: `${theme.spacing.unit * 12}px auto`,
     },
   },
@@ -27,13 +30,18 @@ class Source extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.intro}>
-          <Typography variant="body2">
-            Monitor the sentiments expressed in news media posts on social media
-            on selected topics over time Click on a news organization to see its
-            topics. The charts illustrate the strength of the sentiment
-            expressed in the post - the higher or lower the points in the chart,
-            the more strongly positive or negative the sentiment.
-          </Typography>
+          <div>
+            <Typography variant="body2">
+              Monitor the sentiments expressed in news media posts on social
+              media on selected topics over time.
+            </Typography>
+            <Typography variant="body2">
+              Click on a news organization to see its topics. The charts
+              illustrate the strength of the sentiment expressed in the post -
+              the higher or lower the points in the chart, the more strongly
+              positive or negative the sentiment.
+            </Typography>
+          </div>
         </div>
         <Divider />
         <Hero title="Our sources" description="And their top 3 concerns" />

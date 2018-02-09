@@ -14,7 +14,7 @@ const styles = theme => ({
     paddingBottom: '4vh',
     paddingLeft: '5vw',
     '& h2': {
-      fontSize: '4rem',
+      fontSize: '3rem',
     },
     boxShadow: '0 0 200px black inset',
   },

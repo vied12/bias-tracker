@@ -27,7 +27,6 @@ const EntityChart = ({
   const data = allSentiments.edges.map(({ node }) => ({ val: node.compound }))
   return (
     <div className={classes.root}>
-      {data.length > 0 && <Score value={mean(data.map(d => d.val))} />}
       <ResponsiveContainer height={60}>
         <BarChart data={data} stackOffset="sign">
           <Bar isAnimationActive={false} type="monotone" dataKey="val">
@@ -37,6 +36,7 @@ const EntityChart = ({
           </Bar>
         </BarChart>
       </ResponsiveContainer>
+      {data.length > 0 && <Score value={mean(data.map(d => d.val))} />}
     </div>
   )
 }

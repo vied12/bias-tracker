@@ -18,6 +18,9 @@ const styles = theme => ({
     paddingBottom: '10vw',
     display: 'flex',
     alignItems: 'flex-start',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+    },
   },
   siteMap: {
     paddingRight: 40,
