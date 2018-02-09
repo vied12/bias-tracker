@@ -40,9 +40,6 @@ export const mainTheme = {
         margin: '4px',
         boxShadow: 'unset',
       },
-      raisedPrimary: {
-        boxShadow: '3px 3px 0px rgba(0,0,0,0.1)',
-      },
     },
   },
 }

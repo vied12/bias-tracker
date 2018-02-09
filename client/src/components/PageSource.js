@@ -108,6 +108,7 @@ class Source extends Component {
                   <EntityChart entity={entityNode.id} source={source.id} />
                   <Button
                     variant="raised"
+                    color="primary"
                     className={classes.seeMoreBtn}
                     onClick={() => this.setState({ viewPosts: entityNode.id })}
                   >

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import auth from 'ducks/auth'
+import dialog from 'ducks/dialog'
 
 const rootReducer = combineReducers({
-  auth,
+  dialog,
 })
 
 export default rootReducer

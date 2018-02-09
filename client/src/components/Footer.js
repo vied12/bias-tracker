@@ -6,6 +6,8 @@ import Typography from 'material-ui/Typography'
 import { Link } from 'react-router-dom'
 import { withDarkTheme } from 'theme'
 import compose from 'recompose/compose'
+import { connect } from 'react-redux'
+import * as dialogActions from 'ducks/dialog'
 
 const styles = theme => ({
   root: {
@@ -26,16 +28,14 @@ const styles = theme => ({
 })
 
 function Footer(props) {
-  const { classes } = props
+  const { classes, openAboutUs } = props
   return (
     <div className={classes.root}>
       <Button component={Link} to="/">
         <Typography variant="title">Bias Tracker</Typography>
       </Button>
       <div className={classes.siteMap}>
-        <Button component={Link} to="/about">
-          About the project
-        </Button>
+        <Button onClick={openAboutUs}>About the Project</Button>
       </div>
       <div className={classes.siteMap}>
         <Typography variant="subheading" style={{ padding: '8px 16px' }}>
@@ -59,4 +59,13 @@ Footer.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default compose(withDarkTheme, withStyles(styles))(Footer)
+export default compose(
+  withDarkTheme,
+  withStyles(styles),
+  connect(
+    () => ({}),
+    dispatch => ({
+      openAboutUs: () => dispatch(dialogActions.openAboutUs()),
+    })
+  )
+)(Footer)
