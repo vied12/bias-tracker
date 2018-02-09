@@ -59,9 +59,6 @@ const styles = theme => ({
       marginBottom: theme.spacing.unit * 3,
     },
   },
-  score: {
-    textAlign: 'right',
-  },
 })
 
 class Source extends Component {
