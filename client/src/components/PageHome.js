@@ -3,25 +3,13 @@ import compose from 'recompose/compose'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
-import newspaperImg from 'assets/newspaper.jpg'
 import AllSources from 'components/AllSources'
-import { withDarkTheme } from 'theme'
+import AllEntities from 'components/AllEntities'
+import Hero from 'components/Hero'
+import reporterImg from 'assets/reporter.jpg'
 
 const styles = theme => ({
   root: {},
-  hero: {
-    // minHeight: '15vh',
-    backgroundImage: `url(${newspaperImg})`,
-    backgroundSize: 'cover',
-    backgroundAttachment: 'fixed',
-    paddingTop: '5vh',
-    paddingBottom: '4vh',
-    paddingLeft: '5vw',
-    '& h2': {
-      fontSize: '4rem',
-    },
-    boxShadow: '0 0 200px black inset',
-  },
   intro: {
     backgroundColor: theme.palette.primary[50],
     padding: theme.spacing.unit * 3,
@@ -48,15 +36,14 @@ class Source extends Component {
           </Typography>
         </div>
         <Divider />
-        {withDarkTheme(() => (
-          <div className={classes.hero}>
-            <Typography variant="title">Our sources</Typography>
-            <Typography style={{ fontSize: '1rem', fontWeight: '700' }}>
-              And their top 5 concerns
-            </Typography>
-          </div>
-        ))()}
+        <Hero title="Our sources" description="And their top 3 concerns" />
         <AllSources />
+        <Hero
+          title="The Entities"
+          description="And how they are covered by the Media"
+          image={reporterImg}
+        />
+        <AllEntities />
       </div>
     )
   }

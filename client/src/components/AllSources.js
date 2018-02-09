@@ -9,6 +9,7 @@ import Button from 'material-ui/Button'
 import countrynames from 'country-list'
 import EntityChart from 'components/EntityChart'
 import { Link } from 'react-router-dom'
+import Loader from 'components/Loader'
 
 const countries = countrynames()
 
@@ -33,7 +34,7 @@ const styles = theme => ({
 
 const Sources = ({ classes, data: { loading, allSources } }) => {
   if (loading) {
-    return null
+    return <Loader />
   }
   return (
     <div className={classes.root}>
@@ -79,7 +80,7 @@ export default compose(
             country
             language
             url
-            mainEntities(first: 5) {
+            mainEntities(first: 3) {
               edges {
                 node {
                   id

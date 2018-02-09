@@ -4,7 +4,7 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 import core.models
 import tags.models
-from django.db.models import Count, Avg
+from django.db.models import Count
 
 
 class Source(DjangoObjectType):
@@ -21,7 +21,6 @@ class Source(DjangoObjectType):
 
     def resolve_main_entities(self, args, **kwargs):
         return tags.models.Entity.objects.filter(text__source=self) \
-            .annotate(average=Avg('text__sentimentreport__compound')) \
             .annotate(count=Count('text')) \
             .filter(count__gt=10).order_by('-count')
 
@@ -35,20 +34,33 @@ class Text(DjangoObjectType):
 
 
 class Entity(DjangoObjectType):
-    count = graphene.Int()
-    average = graphene.Float()
+    count_text = graphene.Int()
+    count_sources = graphene.Int()
+    sources = DjangoFilterConnectionField(lambda: Source)
 
     class Meta:
         model = tags.models.Entity
-        filter_fields = ['name']
+        filter_fields = {
+            'name': ['icontains']
+        }
         interfaces = (relay.Node, )
+
+    def resolve_sources(self, params, **kwargs):
+        return list(
+            core.models.Source.objects.filter(text__entities=self)
+                .annotate(count_entities=Count('text__entities'))
+                .filter(count_entities__gt=10)
+                .distinct()
+        )
 
 
 class Tag(DjangoObjectType):
 
     class Meta:
         model = tags.models.Tag
-        filter_fields = ['name']
+        filter_fields = {
+            'name': ['icontains']
+        }
         interfaces = (relay.Node, )
 
 
@@ -62,10 +74,19 @@ class SentimentReport(DjangoObjectType):
 
 class Query(ObjectType):
     source = relay.Node.Field(Source)
+    all_entities = DjangoFilterConnectionField(Entity)
+    all_tags = DjangoFilterConnectionField(Tag)
     all_sources = DjangoFilterConnectionField(Source)
     all_texts = DjangoFilterConnectionField(Text)
     all_sentiments = DjangoFilterConnectionField(SentimentReport)
-    # entity = relay.Node.Field(Entity)
+    most_common_entities = DjangoFilterConnectionField(Entity)
+
+    def resolve_most_common_entities(self, obj, **kwargs):
+        return tags.models.Entity.objects \
+            .annotate(count_text=Count('text', distinct=True)) \
+            .annotate(count_sources=Count('text__source__pk', distinct=True)) \
+            .order_by('-count_text') \
+            .filter(count_sources__gt=4)
 
 
 schema = Schema(query=Query)

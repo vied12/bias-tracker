@@ -12,7 +12,6 @@ import Loader from 'components/Loader'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import countrynames from 'country-list'
-import Score from 'components/Score'
 
 const countries = countrynames()
 
@@ -97,9 +96,6 @@ class Source extends Component {
                   <Tooltip title={entityNode.entityType} placement="top">
                     <div className={classes.entityName}>
                       <Typography variant="title">{entityNode.name}</Typography>
-                      <Typography className={classes.score}>
-                        <Score value={entityNode.average} />
-                      </Typography>
                     </div>
                   </Tooltip>
                   <EntityChart entity={entityNode.id} source={source.id} />
@@ -140,14 +136,12 @@ export default compose(
           id
           name
           facebookPageId
-          mainEntities(first: 50) {
+          mainEntities(first: 100) {
             edges {
               node {
                 id
                 name
                 entityType
-                count
-                average
               }
             }
           }
