@@ -30,7 +30,7 @@ function ButtonAppBar(props) {
   const { classes, openAboutUs } = props
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <div style={{ flex: 1 }}>
             <Button component={Link} to="/">

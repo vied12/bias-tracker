@@ -23,6 +23,7 @@ const styles = theme => ({
     minHeight: '30vh',
     backgroundImage: `url(${newspaperImg})`,
     backgroundSize: 'cover',
+    backgroundAttachment: 'fixed',
     paddingTop: '15vh',
     paddingLeft: '5vw',
     '& h2': {
@@ -78,7 +79,6 @@ class Source extends Component {
         <div className={classes.hero}>
           <Typography variant="title">{source.name}</Typography>
           <Typography>{countries.getName(source.country)}</Typography>
-          <Typography>{source.textCount} analysed posts</Typography>
         </div>
         <div className={classes.body}>
           <Grid container spacing={40}>
@@ -145,7 +145,6 @@ export default compose(
               }
             }
           }
-          textCount
           country
           language
         }

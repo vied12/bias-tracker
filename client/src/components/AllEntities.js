@@ -5,6 +5,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import Typography from 'material-ui/Typography'
 import Grid from 'material-ui/Grid'
+import Divider from 'material-ui/Divider'
 import Button from 'material-ui/Button'
 import EntityChart from 'components/EntityChart'
 import Loader from 'components/Loader'
@@ -15,14 +16,21 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
   },
   paper: {
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit,
   },
   entity: {
     paddingTop: theme.spacing.unit * 2,
-    fontSize: '1rem',
   },
-  sourceTitle: {
+  titleBtn: {
     marginLeft: 0 - theme.spacing.unit * 2,
+  },
+  entityTitle: {
+    position: 'sticky',
+    zIndex: 1,
+    top: 64,
+    textAlign: 'center',
+    marginBottom: 20,
+    backgroundColor: theme.palette.background.default,
   },
 })
 
@@ -32,25 +40,27 @@ const Sources = ({ classes, data: { loading, mostCommonEntities } }) => {
   }
   return (
     <div className={classes.root}>
-      <Grid container spacing={40}>
-        {mostCommonEntities.edges
-          .filter(({ node }) => node.sources.edges.length >= 3)
-          .map(({ node }) => (
-            <Grid key={node.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
-              <div className={classes.paper}>
-                <Button
-                  component={Link}
-                  to={`/entity/${node.id}`}
-                  className={classes.sourceTitle}
-                >
-                  <Typography variant="title">{node.name}</Typography>
-                </Button>
-                {node.sources.edges.map(({ node: sourceNode }) => (
-                  <div key={sourceNode.id}>
+      {mostCommonEntities.edges
+        .filter(({ node }) => node.sources.edges.length >= 3)
+        .map(({ node }) => (
+          <div key={node.id} className={classes.paper}>
+            <div className={classes.entityTitle}>
+              <Button
+                component={Link}
+                to={`/entity/${node.id}`}
+                className={classes.titleBtn}
+              >
+                <Typography variant="title">{node.name}</Typography>
+              </Button>
+            </div>
+            <Grid container spacing={40}>
+              {node.sources.edges.map(({ node: sourceNode }) => (
+                <Grid key={sourceNode.id} item xs={12} sm={6} md={3}>
+                  <div>
                     <Button
                       component={Link}
                       to={`/source/${sourceNode.id}`}
-                      className={classes.sourceTitle}
+                      className={classes.titleBtn}
                     >
                       <Typography variant="headline">
                         {sourceNode.name}
@@ -58,11 +68,12 @@ const Sources = ({ classes, data: { loading, mostCommonEntities } }) => {
                     </Button>
                     <EntityChart entity={node.id} source={sourceNode.id} />
                   </div>
-                ))}
-              </div>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-      </Grid>
+            <Divider style={{ marginTop: 40 }} />
+          </div>
+        ))}
     </div>
   )
 }
