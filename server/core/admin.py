@@ -14,6 +14,9 @@ class SourceAdmin(admin.ModelAdmin):
         'language',
         'created_by',
     )
+    list_filter = (
+        'language',
+    )
 
     def save_model(self, request, obj, form, change):
         user = request.user
