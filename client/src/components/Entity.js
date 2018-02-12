@@ -41,6 +41,11 @@ const Tagging = ({ classes, node }) => {
           <Typography variant="title">{node.name}</Typography>
         </Button>
       </div>
+      {node.sources.edges.length === 0 && (
+        <Typography variant="display1" style={{ textAlign: 'center' }}>
+          There are not enough data to be relevant
+        </Typography>
+      )}
       <Grid container spacing={40}>
         {node.sources.edges.map(({ node: sourceNode }) => (
           <Grid key={sourceNode.id} item xs={12} sm={6} md={4} lg={3} xl={1}>
