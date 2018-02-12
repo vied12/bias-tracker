@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from views import FrontendAppView
+from views import FrontendAppView, SourceView, TagView, EntityView
 from graphene_django.views import GraphQLView
 from graphql_schema import schema
 from django.views.decorators.csrf import csrf_exempt
@@ -27,6 +27,9 @@ urlpatterns = [
     url(r'^graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
     url(r'^graphql-batch/', csrf_exempt(GraphQLView.as_view(batch=True, schema=schema))),
     url(r'^django-rq/', include('django_rq.urls')),
+    url(r'^source/(?P<id>[\w=]+)', SourceView.as_view(), name='source'),
+    url(r'^tag/(?P<id>[\w=]+)', TagView.as_view(), name='tag'),
+    url(r'^entity/(?P<id>[\w=]+)', EntityView.as_view(), name='entity'),
     url(r'^', FrontendAppView.as_view(), name='home'),
 ]
 

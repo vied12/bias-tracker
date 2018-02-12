@@ -9,6 +9,9 @@ from django.utils.decorators import method_decorator
 import re
 from django.urls import reverse
 import django.utils.html
+from graphql_relay.node.node import from_global_id
+import core.models
+import tags.models
 
 keys = [
     '__OG_TITLE__',
@@ -21,6 +24,8 @@ keys = [
 ]
 initial = {key: '' for key in keys}
 
+desc = 'Monitor the sentiments expressed in news media posts on social media on selected topics over time.'
+
 
 class FrontendAppView(View):
     """
@@ -32,8 +37,45 @@ class FrontendAppView(View):
     def get(self, request, **params):
         return get_template({
             '__OG_TITLE__': 'BiasTracker',
+            '__OG_DESCRIPTION__': desc,
             '__OG_TYPE__': 'website',
             '__OG_URL__': request.build_absolute_uri(reverse('home')),
+        })
+
+
+class SourceView(FrontendAppView):
+    @method_decorator(ensure_csrf_cookie)
+    def get(self, request, **params):
+        source = core.models.Source.objects.get(pk=from_global_id(params['id'])[1])
+        return get_template({
+            '__OG_TITLE__': '{} | BiasTracker'.format(source.name),
+            '__OG_DESCRIPTION__': desc,
+            '__OG_TYPE__': 'website',
+            '__OG_URL__': request.build_absolute_uri(reverse('source', kwargs={'id': params['id']})),
+        })
+
+
+class EntityView(FrontendAppView):
+    @method_decorator(ensure_csrf_cookie)
+    def get(self, request, **params):
+        entity = tags.models.Entity.objects.get(pk=from_global_id(params['id'])[1])
+        return get_template({
+            '__OG_TITLE__': '{} | BiasTracker'.format(entity.name),
+            '__OG_DESCRIPTION__': desc,
+            '__OG_TYPE__': 'website',
+            '__OG_URL__': request.build_absolute_uri(reverse('entity', kwargs={'id': params['id']})),
+        })
+
+
+class TagView(FrontendAppView):
+    @method_decorator(ensure_csrf_cookie)
+    def get(self, request, **params):
+        tag = tags.models.Tag.objects.get(pk=from_global_id(params['id'])[1])
+        return get_template({
+            '__OG_TITLE__': '{} | BiasTracker'.format(tag.name),
+            '__OG_DESCRIPTION__': desc,
+            '__OG_TYPE__': 'website',
+            '__OG_URL__': request.build_absolute_uri(reverse('tag', kwargs={'id': params['id']})),
         })
 
 
