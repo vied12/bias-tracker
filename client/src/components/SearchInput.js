@@ -14,7 +14,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import compose from 'recompose/compose'
 import history from 'utils/history'
-
+import { fromGlobalId } from 'graphql-relay-tools'
 import 'react-select/dist/react-select.css'
 
 class Option extends React.Component {
@@ -42,20 +42,74 @@ class Option extends React.Component {
 }
 
 function SelectWrapped(props) {
-  const { classes, defaultTagsData, data, ...other } = props
+  const {
+    classes,
+    defaultTagsData,
+    defaultEntitiesData,
+    entitiesData,
+    tagsData,
+    ...other
+  } = props
   let options = []
-  if (data && data.allEntities) {
-    options = data.allEntities.edges.map(({ node }) => ({
-      label: node.name,
-      value: node.id,
-    }))
+  if (
+    entitiesData &&
+    tagsData &&
+    tagsData.allTags &&
+    entitiesData.allEntities
+  ) {
+    options = [
+      ...entitiesData.allEntities.edges.map(({ node }) => ({
+        label: (
+          <div>
+            {node.name}{' '}
+            <Typography variant="caption" component="span">
+              {node.entityType}
+            </Typography>
+          </div>
+        ),
+        value: node.id,
+      })),
+      ...tagsData.allTags.edges.map(({ node }) => ({
+        label: (
+          <div>
+            {node.name}{' '}
+            <Typography variant="caption" component="span">
+              tag
+            </Typography>
+          </div>
+        ),
+        value: node.id,
+      })),
+    ]
   } else {
-    options = defaultTagsData.loading
-      ? []
-      : defaultTagsData.mostCommonEntities.edges.map(({ node }) => ({
-          label: node.name,
-          value: node.id,
-        }))
+    options = [
+      ...(defaultEntitiesData.loading
+        ? []
+        : defaultEntitiesData.mostCommonEntities.edges.map(({ node }) => ({
+            label: (
+              <div>
+                {node.name}{' '}
+                <Typography variant="caption" component="span">
+                  {node.entityType}
+                </Typography>
+              </div>
+            ),
+            value: node.id,
+          }))),
+      ...(defaultTagsData.loading
+        ? []
+        : defaultTagsData.mostCommonTags.edges.map(({ node }) => ({
+            label: (
+              <div>
+                {node.name}{' '}
+                <Typography variant="caption" component="span">
+                  tag
+                </Typography>
+              </div>
+            ),
+            value: node.id,
+          }))),
+    ]
   }
   return (
     <Select
@@ -97,11 +151,12 @@ function SelectWrapped(props) {
 const SelectConnected = compose(
   graphql(
     gql`
-      query searchTags($keyword: String!) {
+      query searchEntities($keyword: String!) {
         allEntities(name_Icontains: $keyword, first: 5) {
           edges {
             node {
               id
+              entityType
               name
             }
           }
@@ -109,6 +164,7 @@ const SelectConnected = compose(
       }
     `,
     {
+      name: 'entitiesData',
       options: props => ({
         variables: {
           keyword: props.inputValue,
@@ -119,8 +175,49 @@ const SelectConnected = compose(
   ),
   graphql(
     gql`
-      query defaultTags {
+      query searchTags($keyword: String!) {
+        allTags(name_Icontains: $keyword, first: 5) {
+          edges {
+            node {
+              id
+              name
+            }
+          }
+        }
+      }
+    `,
+    {
+      name: 'tagsData',
+      options: props => ({
+        variables: {
+          keyword: props.inputValue,
+        },
+        skip: !props.inputValue || props.inputValue === '',
+      }),
+    }
+  ),
+  graphql(
+    gql`
+      query defaultEntities {
         mostCommonEntities(first: 50) {
+          edges {
+            node {
+              id
+              name
+              entityType
+            }
+          }
+        }
+      }
+    `,
+    {
+      name: 'defaultEntitiesData',
+    }
+  ),
+  graphql(
+    gql`
+      query defaultTags {
+        mostCommonTags(first: 50) {
           edges {
             node {
               id
@@ -218,6 +315,7 @@ const styles = theme => ({
     },
     '.Select.is-focused:not(.is-open) > .Select-control': {
       boxShadow: 'none',
+      backgroundColor: 'transparent',
     },
     '.Select-menu': {
       maxHeight: ITEM_HEIGHT * 4.5,
@@ -265,7 +363,9 @@ class IntegrationReactSelect extends React.Component {
   }
 
   handleSearchChange = value => {
-    history.push(`/entity/${value.value}`)
+    const { type } = fromGlobalId(value.value)
+
+    history.push(`/${type.toLowerCase()}/${value.value}`)
   }
 
   render() {

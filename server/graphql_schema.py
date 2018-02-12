@@ -49,12 +49,13 @@ class Entity(DjangoObjectType):
         return list(
             core.models.Source.objects.filter(text__entities=self)
                 .annotate(count_entities=Count('text__entities'))
-                .filter(count_entities__gt=10)
+                .filter(count_entities__gt=5)
                 .distinct()
         )
 
 
 class Tag(DjangoObjectType):
+    sources = DjangoFilterConnectionField(lambda: Source)
 
     class Meta:
         model = tags.models.Tag
@@ -62,6 +63,14 @@ class Tag(DjangoObjectType):
             'name': ['icontains']
         }
         interfaces = (relay.Node, )
+
+    def resolve_sources(self, params, **kwargs):
+        return list(
+            core.models.Source.objects.filter(text__tags=self)
+                .annotate(count_tags=Count('text__tags'))
+                .filter(count_tags__gt=5)
+                .distinct()
+        )
 
 
 class SentimentReport(DjangoObjectType):
@@ -75,15 +84,24 @@ class SentimentReport(DjangoObjectType):
 class Query(ObjectType):
     source = relay.Node.Field(Source)
     entity = relay.Node.Field(Entity)
+    tag = relay.Node.Field(Tag)
     all_entities = DjangoFilterConnectionField(Entity)
     all_tags = DjangoFilterConnectionField(Tag)
     all_sources = DjangoFilterConnectionField(Source)
     all_texts = DjangoFilterConnectionField(Text)
     all_sentiments = DjangoFilterConnectionField(SentimentReport)
     most_common_entities = DjangoFilterConnectionField(Entity)
+    most_common_tags = DjangoFilterConnectionField(Tag)
 
     def resolve_most_common_entities(self, obj, **kwargs):
         return tags.models.Entity.objects \
+            .annotate(count_text=Count('text', distinct=True)) \
+            .annotate(count_sources=Count('text__source__pk', distinct=True)) \
+            .order_by('-count_text') \
+            .filter(count_sources__gt=3)
+
+    def resolve_most_common_tags(self, obj, **kwargs):
+        return tags.models.Tag.objects \
             .annotate(count_text=Count('text', distinct=True)) \
             .annotate(count_sources=Count('text__source__pk', distinct=True)) \
             .order_by('-count_text') \
