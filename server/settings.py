@@ -151,7 +151,8 @@ REST_FRAMEWORK = {
 GRAPHENE = {
     'MIDDLEWARE': [
         'graphene_django.debug.DjangoDebugMiddleware',
-    ]
+    ],
+    'RELAY_CONNECTION_MAX_LIMIT': 200
 }
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')

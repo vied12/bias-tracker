@@ -15,6 +15,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
     minHeight: 150,
     padding: '5vw',
+    marginTop: theme.spacing.unit * 6,
     paddingBottom: '10vw',
     display: 'flex',
     alignItems: 'flex-start',

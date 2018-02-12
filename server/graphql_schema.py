@@ -41,7 +41,7 @@ class Entity(DjangoObjectType):
     class Meta:
         model = tags.models.Entity
         filter_fields = {
-            'name': ['icontains']
+            'name': ['icontains'],
         }
         interfaces = (relay.Node, )
 
@@ -74,6 +74,7 @@ class SentimentReport(DjangoObjectType):
 
 class Query(ObjectType):
     source = relay.Node.Field(Source)
+    entity = relay.Node.Field(Entity)
     all_entities = DjangoFilterConnectionField(Entity)
     all_tags = DjangoFilterConnectionField(Tag)
     all_sources = DjangoFilterConnectionField(Source)
@@ -86,7 +87,7 @@ class Query(ObjectType):
             .annotate(count_text=Count('text', distinct=True)) \
             .annotate(count_sources=Count('text__source__pk', distinct=True)) \
             .order_by('-count_text') \
-            .filter(count_sources__gt=4)
+            .filter(count_sources__gt=3)
 
 
 schema = Schema(query=Query)

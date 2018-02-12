@@ -40,7 +40,7 @@ const Sources = ({ classes, data: { loading, allSources } }) => {
     <div className={classes.root}>
       <Grid container spacing={40}>
         {allSources.edges.map(({ node }) => (
-          <Grid key={node.id} item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Grid key={node.id} item xs={12} sm={6} md={4} lg={2} xl={1}>
             <div className={classes.paper}>
               <Button
                 component={Link}

@@ -3,10 +3,14 @@ import compose from 'recompose/compose'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
+import Button from 'material-ui/Button'
+import MostCommonEntiesList from 'components/MostCommonEntiesList'
 import AllSources from 'components/AllSources'
 import AllEntities from 'components/AllEntities'
 import Hero from 'components/Hero'
 import reporterImg from 'assets/reporter.jpg'
+import { HashLink as Link } from 'react-router-hash-link'
+import SearchInput from 'components/SearchInput'
 
 const styles = theme => ({
   root: {},
@@ -41,6 +45,25 @@ class Source extends Component {
               the higher or lower the points in the chart, the more strongly
               positive or negative the sentiment.
             </Typography>
+            <Button
+              component={Link}
+              to="#our-sources"
+              variant="raised"
+              size="large"
+              color="primary"
+            >
+              Sources
+            </Button>
+            <Button
+              component={Link}
+              to="#the-entities"
+              variant="raised"
+              size="large"
+              color="primary"
+            >
+              Entities
+            </Button>
+            <SearchInput />
           </div>
         </div>
         <Divider />
@@ -52,6 +75,7 @@ class Source extends Component {
           image={reporterImg}
         />
         <AllEntities />
+        <MostCommonEntiesList />
       </div>
     )
   }

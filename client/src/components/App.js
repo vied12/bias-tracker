@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import Home from 'components/PageHome'
+import PageHome from 'components/PageHome'
 import Layout from 'components/Layout'
-import Source from 'components/PageSource'
+import PageEntity from 'components/PageEntity'
+import PageSource from 'components/PageSource'
 import ScrollToTop from 'components/ScrollToTop'
 import AboutUsDialog from 'components/AboutUsDialog'
 import history from 'utils/history'
@@ -21,8 +22,9 @@ class App extends Component {
             <Reboot />
             <Layout>
               <Switch>
-                <Route path="/source/:source" component={Source} />
-                <Route exact path="/" component={Home} />
+                <Route path="/entity/:entity" component={PageEntity} />
+                <Route path="/source/:source" component={PageSource} />
+                <Route exact path="/" component={PageHome} />
               </Switch>
             </Layout>
             <AboutUsDialog />

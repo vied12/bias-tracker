@@ -19,6 +19,15 @@ const styles = theme => ({
     boxShadow: '0 0 200px black inset',
   },
 })
+const slugify = text =>
+  text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-') // Replace spaces with -
+    .replace(/[^\w-]+/g, '') // Remove all non-word chars
+    .replace(/--+/g, '-') // Replace multiple - with single -
+    .replace(/^-+/, '') // Trim - from start of text
+    .replace(/-+$/, '') // Trim - from end of text
 
 const Hero = ({ classes, title, description, image }) => {
   return (
@@ -26,7 +35,9 @@ const Hero = ({ classes, title, description, image }) => {
       className={classes.hero}
       style={image && { backgroundImage: `url(${image})` }}
     >
-      <Typography variant="title">{title}</Typography>
+      <Typography variant="title" id={slugify(title)}>
+        {title}
+      </Typography>
       {description && (
         <Typography style={{ fontSize: '1rem', fontWeight: '700' }}>
           {description}
