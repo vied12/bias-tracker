@@ -3,6 +3,7 @@ import compose from 'recompose/compose'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
+import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
 import MostCommonEntiesList from 'components/MostCommonEntiesList'
 import AllSources from 'components/AllSources'
@@ -45,25 +46,35 @@ class Source extends Component {
               the higher or lower the points in the chart, the more strongly
               positive or negative the sentiment.
             </Typography>
-            <Button
-              component={Link}
-              to="#our-sources"
-              variant="raised"
-              size="large"
-              color="primary"
-            >
-              Sources
-            </Button>
-            <Button
-              component={Link}
-              to="#the-entities"
-              variant="raised"
-              size="large"
-              color="primary"
-            >
-              Entities
-            </Button>
-            <SearchInput />
+            <Grid container>
+              <Grid item xs={6}>
+                <Typography variant="title">Explore our data</Typography>
+                <Button
+                  component={Link}
+                  to="#our-sources"
+                  variant="raised"
+                  size="large"
+                  color="primary"
+                >
+                  Sources
+                </Button>
+                <Button
+                  component={Link}
+                  to="#the-entities"
+                  variant="raised"
+                  size="large"
+                  color="primary"
+                >
+                  Entities
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="title">
+                  Looking for something more specific ?
+                </Typography>
+                <SearchInput />
+              </Grid>
+            </Grid>
           </div>
         </div>
         <Divider />
