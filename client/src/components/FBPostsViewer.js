@@ -92,7 +92,7 @@ const FBPostsViewer = ({ classes, sourceData, postsData, onCloseRequest }) => {
                     />
                   </Typography>
                   <Typography>
-                    Strong sentiment:{' '}
+                    Positive sentiment:{' '}
                     <span className={classes.green}>
                       {node.sentimentreport.pos}
                     </span>
@@ -101,7 +101,7 @@ const FBPostsViewer = ({ classes, sourceData, postsData, onCloseRequest }) => {
                     Neutral sentiment: {node.sentimentreport.neu}
                   </Typography>
                   <Typography>
-                    Weak sentiment:{' '}
+                    Negative sentiment:{' '}
                     <span className={classes.red}>
                       {node.sentimentreport.neg}
                     </span>
