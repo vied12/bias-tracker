@@ -77,7 +77,7 @@ class SentimentReport(DjangoObjectType):
 
     class Meta:
         model = core.models.SentimentReport
-        filter_fields = ['text__source', 'text__entities']
+        filter_fields = ['text__source', 'text__entities', 'text__tags']
         interfaces = (relay.Node, )
 
 

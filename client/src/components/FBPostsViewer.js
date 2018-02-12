@@ -6,6 +6,7 @@ import CloseIcon from 'material-ui-icons/Close'
 import IconButton from 'material-ui/IconButton'
 import Typography from 'material-ui/Typography'
 import Grid from 'material-ui/Grid'
+import Button from 'material-ui/Button'
 import gql from 'graphql-tag'
 import FacebookProvider, { EmbeddedPost } from 'react-facebook'
 import Slider from 'react-slick'
@@ -13,6 +14,7 @@ import red from 'material-ui/colors/red'
 import green from 'material-ui/colors/green'
 import Loader from 'components/Loader'
 import Score from 'components/Score'
+import { Link } from 'react-router-dom'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -109,13 +111,25 @@ const FBPostsViewer = ({ classes, sourceData, postsData, onCloseRequest }) => {
                   Entities
                 </Typography>
                 {node.entities.edges.map(({ node: entityNode }) => (
-                  <Typography key={entityNode.id}>{entityNode.name}</Typography>
+                  <Button
+                    component={Link}
+                    to={`/entity/${entityNode.id}`}
+                    key={entityNode.id}
+                  >
+                    {entityNode.name}
+                  </Button>
                 ))}
                 <Typography variant="title" className={classes.title}>
                   Tags
                 </Typography>
                 {node.tags.edges.map(({ node: tagNode }) => (
-                  <Typography key={tagNode.id}>{tagNode.name}</Typography>
+                  <Button
+                    component={Link}
+                    to={`/tag/${tagNode.id}`}
+                    key={tagNode.id}
+                  >
+                    {tagNode.name}
+                  </Button>
                 ))}
               </Grid>
               <Grid item xs={12} md={9}>
@@ -130,9 +144,11 @@ const FBPostsViewer = ({ classes, sourceData, postsData, onCloseRequest }) => {
                 </FacebookProvider>
                 {sourceData.source.language !== 'EN' && (
                   <div>
-                    <Typography>{node.message}</Typography>
-                    <Typography>{node.linkName}</Typography>
-                    <Typography>{node.linkDescription}</Typography>
+                    <Typography variant="caption">{node.message}</Typography>
+                    <Typography variant="caption">{node.linkName}</Typography>
+                    <Typography variant="caption">
+                      {node.linkDescription}
+                    </Typography>
                   </div>
                 )}
               </Grid>

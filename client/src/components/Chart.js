@@ -17,12 +17,10 @@ const styles = theme => ({
   },
 })
 
-const EntityChart = ({
+const Chart = ({
   theme,
   classes,
   data: { loading, allSentiments = { edges: [] } },
-  entity,
-  source,
 }) => {
   const data = allSentiments.edges.map(({ node }) => ({ val: node.compound }))
   return (
@@ -44,8 +42,12 @@ const EntityChart = ({
 export default compose(
   withStyles(styles, { withTheme: true }),
   graphql(gql`
-    query getReportsForEntityChart($entity: [ID], $source: ID!) {
-      allSentiments(text_Source: $source, text_Entities: $entity) {
+    query getReportsForChart($entity: [ID], $tag: [ID], $source: ID!) {
+      allSentiments(
+        text_Source: $source
+        text_Entities: $entity
+        text_Tags: $tag
+      ) {
         edges {
           node {
             id
@@ -55,4 +57,4 @@ export default compose(
       }
     }
   `)
-)(EntityChart)
+)(Chart)

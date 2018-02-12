@@ -6,7 +6,7 @@ import Grid from 'material-ui/Grid'
 import Tooltip from 'material-ui/Tooltip'
 import Button from 'material-ui/Button'
 import newspaperImg from 'assets/newspaper.jpg'
-import EntityChart from 'components/EntityChart'
+import Chart from 'components/Chart'
 import FBPostsViewer from 'components/FBPostsViewer'
 import Loader from 'components/Loader'
 import { graphql } from 'react-apollo'
@@ -98,7 +98,7 @@ class Source extends Component {
                       <Typography variant="title">{entityNode.name}</Typography>
                     </div>
                   </Tooltip>
-                  <EntityChart entity={entityNode.id} source={source.id} />
+                  <Chart entity={entityNode.id} source={source.id} />
                   <Button
                     variant="raised"
                     color="primary"

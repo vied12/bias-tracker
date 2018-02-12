@@ -7,7 +7,7 @@ import Typography from 'material-ui/Typography'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
 import countrynames from 'country-list'
-import EntityChart from 'components/EntityChart'
+import Chart from 'components/Chart'
 import { Link } from 'react-router-dom'
 import Loader from 'components/Loader'
 
@@ -57,7 +57,7 @@ const Sources = ({ classes, data: { loading, allSources } }) => {
                   <Typography variant="title" className={classes.entity}>
                     {entityNode.name}
                   </Typography>
-                  <EntityChart entity={entityNode.id} source={node.id} />
+                  <Chart entity={entityNode.id} source={node.id} />
                 </div>
               ))}
             </div>

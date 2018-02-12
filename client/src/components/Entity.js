@@ -4,8 +4,9 @@ import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
-import EntityChart from 'components/EntityChart'
+import Chart from 'components/Chart'
 import { Link } from 'react-router-dom'
+import { fromGlobalId } from 'graphql-relay-tools'
 
 const styles = theme => ({
   root: {
@@ -27,13 +28,14 @@ const styles = theme => ({
   },
 })
 
-const Entity = ({ classes, node }) => {
+const Tagging = ({ classes, node }) => {
+  const { type } = fromGlobalId(node.id)
   return (
     <div key={node.id} className={classes.root}>
       <div className={classes.entityTitle}>
         <Button
           component={Link}
-          to={`/entity/${node.id}`}
+          to={`/${type.toLowerCase()}/${node.id}`}
           className={classes.titleBtn}
         >
           <Typography variant="title">{node.name}</Typography>
@@ -50,7 +52,11 @@ const Entity = ({ classes, node }) => {
               >
                 <Typography variant="headline">{sourceNode.name}</Typography>
               </Button>
-              <EntityChart entity={node.id} source={sourceNode.id} />
+              <Chart
+                entity={type === 'Entity' ? node.id : undefined}
+                tag={type === 'Tag' ? node.id : undefined}
+                source={sourceNode.id}
+              />
             </div>
           </Grid>
         ))}
@@ -59,4 +65,4 @@ const Entity = ({ classes, node }) => {
   )
 }
 
-export default compose(withStyles(styles))(Entity)
+export default compose(withStyles(styles))(Tagging)
