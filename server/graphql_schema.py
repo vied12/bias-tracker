@@ -31,7 +31,7 @@ class Text(DjangoObjectType):
 
     class Meta:
         model = core.models.Text
-        filter_fields = ['id', 'entities', 'source']
+        filter_fields = ['id', 'entities', 'source', 'tags']
         interfaces = (relay.Node, )
 
 

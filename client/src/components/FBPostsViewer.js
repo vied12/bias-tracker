@@ -14,12 +14,12 @@ import Loader from 'components/Loader'
 import Score from 'components/Score'
 import { Link } from 'react-router-dom'
 import { DialogContent, DialogTitle } from 'material-ui/Dialog'
-import { connect } from 'react-redux'
-import * as dialogActions from 'ducks/dialog'
 import { NextButton, PrevButton } from 'components/Slider'
+import { get } from 'lodash'
 
 const styles = theme => ({
   root: {
+    padding: theme.spacing.unit * 3,
     '& .slick-prev::before, & .slick-next::before': {
       color: theme.palette.primary[500],
     },
@@ -27,11 +27,6 @@ const styles = theme => ({
       position: 'relative',
       bottom: 0,
     },
-  },
-  close: {
-    position: 'absolute',
-    right: '10vw',
-    zIndex: 1,
   },
   slide: {
     backgroundColor: 'white',
@@ -60,24 +55,36 @@ const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   lazyLoad: true,
-  nextArrow: <NextButton />,
-  prevArrow: <PrevButton />,
+  nextArrow: <NextButton margin={-50} />,
+  prevArrow: <PrevButton margin={-50} />,
 }
 
 const FBPostsViewer = ({
   classes,
-  dialog,
-  close,
+  entityData,
+  tagData,
   sourceData,
   postsData,
-  onCloseRequest,
 }) => {
-  if (sourceData.loading || postsData.loading) {
+  if (
+    sourceData.loading ||
+    postsData.loading ||
+    get(entityData, 'loading') ||
+    get(tagData, 'loading')
+  ) {
     return <Loader />
   }
+  const title = (
+    <div>
+      <Typography>{sourceData.source.name}</Typography>
+      <Typography variant="title">
+        {get(tagData, 'tag.name', false) || get(entityData, 'entity.name')}
+      </Typography>
+    </div>
+  )
   return (
     <div>
-      <DialogTitle disableTypography>{sourceData.source.name}</DialogTitle>
+      <DialogTitle disableTypography>{title}</DialogTitle>
       <DialogContent style={{ overflowX: 'hidden' }}>
         <div className={classes.root}>
           <Slider {...settings}>
@@ -173,18 +180,10 @@ const FBPostsViewer = ({
 
 export default compose(
   withStyles(styles),
-  connect(
-    state => ({
-      dialog: state.dialog.dialog === dialogActions.OPEN_FB_VIEWER,
-    }),
-    dispatch => ({
-      close: () => dispatch(dialogActions.close()),
-    })
-  ),
   graphql(
     gql`
-      query getFBPosts($entity: [ID], $source: ID!) {
-        allTexts(source: $source, entities: $entity) {
+      query getFBPosts($entity: [ID], $tag: [ID], $source: ID!) {
+        allTexts(source: $source, entities: $entity, tags: $tag) {
           edges {
             node {
               id
@@ -238,6 +237,38 @@ export default compose(
     `,
     {
       name: 'sourceData',
+    }
+  ),
+  graphql(
+    gql`
+      query getEntityFB($entity: ID!) {
+        entity(id: $entity) {
+          id
+          name
+        }
+      }
+    `,
+    {
+      name: 'entityData',
+      options: props => ({
+        skip: !props.entity,
+      }),
+    }
+  ),
+  graphql(
+    gql`
+      query getTagFB($tag: ID!) {
+        tag(id: $tag) {
+          id
+          name
+        }
+      }
+    `,
+    {
+      name: 'tagData',
+      options: props => ({
+        skip: !props.tag,
+      }),
     }
   )
 )(FBPostsViewer)

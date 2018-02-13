@@ -54,14 +54,4 @@ const AboutUsDialog = ({ classes, dialog, close }) => {
   )
 }
 
-export default compose(
-  withStyles(styles)
-  // connect(
-  //   state => ({
-  //     dialog: state.dialog.dialog === dialogActions.OPEN_ABOUT_US,
-  //   }),
-  //   dispatch => ({
-  //     close: () => dispatch(dialogActions.close()),
-  //   })
-  // )
-)(AboutUsDialog)
+export default compose(withStyles(styles))(AboutUsDialog)

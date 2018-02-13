@@ -18,7 +18,7 @@ export const NextButton = ({
   className,
   currentSlide,
   slideCount,
-  ...other
+  margin = -40,
 }) => {
   return (
     <IconButton
@@ -26,7 +26,7 @@ export const NextButton = ({
       disabled={currentSlide + settings.slidesToShow >= slideCount}
       style={{
         position: 'absolute',
-        right: -40,
+        right: margin,
         top: '50%',
       }}
     >
@@ -41,6 +41,7 @@ export const PrevButton = ({
   className,
   currentSlide,
   slideCount,
+  margin = -40,
 }) => {
   return (
     <IconButton
@@ -48,7 +49,7 @@ export const PrevButton = ({
       disabled={currentSlide === 0}
       style={{
         position: 'absolute',
-        left: -40,
+        left: margin,
         top: '50%',
       }}
     >

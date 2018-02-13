@@ -24,6 +24,7 @@ const Chart = ({
   theme,
   classes,
   entity,
+  tag,
   source,
   data: { loading, allSentiments = { edges: [] } },
 }) => {
@@ -31,7 +32,7 @@ const Chart = ({
   return (
     <div
       className={classes.root}
-      onClick={() => openViewer({ entity, source })}
+      onClick={() => openViewer({ entity, source, tag })}
     >
       <ResponsiveContainer height={60}>
         <BarChart data={data} stackOffset="sign">
