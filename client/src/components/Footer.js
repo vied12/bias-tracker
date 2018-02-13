@@ -39,7 +39,7 @@ function Footer(props) {
         <Typography variant="title">Bias Tracker</Typography>
       </Button>
       <div className={classes.siteMap}>
-        <Button onClick={openAboutUs}>About the Project</Button>
+        <Button onClick={openAboutUs}>Che cosa è</Button>
       </div>
       <div className={classes.siteMap}>
         <Typography variant="subheading" style={{ padding: '8px 16px' }}>

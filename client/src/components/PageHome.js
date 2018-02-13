@@ -37,14 +37,16 @@ class Source extends Component {
           <Grid item xs={12} md={3} lg={2}>
             <div className={classes.intro}>
               <Typography variant="body2">
-                Monitor the sentiments expressed in news media posts on social
-                media on selected topics over time.
+                Monitora il ‘sentiment’ di una testata giornalistica riguardo
+                uno specifico argomento. Vengono presi in esame i post
+                pubblicati da una testata sulla propria pagina social in un
+                certo arco di tempo.
               </Typography>
               <Typography variant="body2">
-                Click on a news organization to see its topics. The charts
-                illustrate the strength of the sentiment expressed in the post -
-                the higher or lower the points in the chart, the more strongly
-                positive or negative the sentiment.
+                Clicca su una testata per vedere gli argomenti selezionati. I
+                grafici illustrano la forza del ‘sentiment’ espresso nel post:
+                punti più alti o più bassi nel grafico, indicano ‘sentiment’ più
+                positivo o negativo.
               </Typography>
             </div>
           </Grid>
@@ -56,7 +58,7 @@ class Source extends Component {
           </Grid>
         </Grid>
         <div>
-          <Hero title="Our sources" description="And their top concerns" />
+          <Hero title="Fonti" description="And their top concerns" />
           <AllSources />
         </div>
       </div>

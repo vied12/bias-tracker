@@ -382,7 +382,8 @@ class IntegrationReactSelect extends React.Component {
             // multi: true,
             inputValue: this.state.inputValue,
             onChange: this.handleChangeMulti,
-            placeholder: 'Find a person, a company, a topic…',
+            placeholder:
+              'Trova una persona, un’azienda, un argomento o altro ancora',
             instanceId: 'react-select-chip',
             id: 'react-select-chip',
             name: 'react-select-chip',

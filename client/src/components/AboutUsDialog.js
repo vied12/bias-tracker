@@ -21,29 +21,34 @@ const styles = theme => ({
 const AboutUsDialog = ({ classes, dialog, close }) => {
   return (
     <Dialog open={dialog} onClose={close} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">About the project</DialogTitle>
+      <DialogTitle id="form-dialog-title">Cosa è Bias Tracker</DialogTitle>
       <DialogContent>
         <Typography className={classes.paragraph}>
-          What kinds of words are used in social media when talking about the
-          news? Do they change over time? The Bias Tracker project is an attempt
-          to use machine learning to automatically analyze sentiment over time,
-          as expressed in various social media feeds in the runup to the Italian
-          election.
+          Che tipo di parole usano i giornali nei social media? Cambiano nel
+          tempo? Il progetto Bias Tracker è un tentativo di utilizzare
+          l’intelligenza artificiale per analizzare automaticamente il sentiment
+          nel tempo, così come viene espresso nella catena dei feed sui social
+          media in vista delle elezioni italiane.
         </Typography>
         <Typography className={classes.paragraph}>
-          Each feed’s posts are then analyzed with the topics extracted and the
-          sentiment words evaluated. This gives us a picture of the sentiment
-          toward a topic. Then we track these topics over time, to see how they
-          develop - does a mainstream media organization change its tone? Does
-          the Five Star Movement change its language?
+          Il sistema tiene traccia dei feed su Facebook di: Corriere della Sera,
+          Fatto Quotidiano e la Repubblica.
         </Typography>
         <Typography className={classes.paragraph}>
-          The project is a collaboration between Agipress, the University of
-          Urbino and software developers Edouard Richard and Douglas Arellanes.
+          I post di ogni feed che riguardano gli argomenti chiave nella campagna
+          elettorale vengono quindi analizzati e valutati in base alle parole
+          emozionali. Questo ci dà un'immagine del ‘sentiment’ nei confronti di
+          un tema. Tenendo traccia di questi argomenti nel tempo, è possibile
+          vedere come si sviluppano e come una testata mainstream cambia il
+          proprio tono?
         </Typography>
         <Typography className={classes.paragraph}>
-          This project has been funded by a grant from TechCamp and is possible
-          thank to US Embassy in Rome support
+          Il progetto è una collaborazione tra Ugo Barbàra e Arcangelo Rociola,
+          giornalisti di Agi; l'Università di Urbino e gli sviluppatori di
+          software Edouard Richard e Douglas Arellanes.
+        </Typography>
+        <Typography className={classes.paragraph}>
+          E’ reso possibile grazie a un finanziamento di TechCamp
         </Typography>
       </DialogContent>
       <DialogActions>
