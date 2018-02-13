@@ -1,6 +1,6 @@
 import React from 'react'
 import compose from 'recompose/compose'
-import MuiDialog from 'material-ui/Dialog'
+import MuiDialog, { withMobileDialog } from 'material-ui/Dialog'
 import { connect } from 'react-redux'
 import * as dialogActions from 'ducks/dialog'
 import FBPostsViewer from 'components/FBPostsViewer'
@@ -10,18 +10,25 @@ const MODALS = {
   [dialogActions.OPEN_FB_VIEWER]: FBPostsViewer,
   [dialogActions.OPEN_ABOUT_US]: AboutUsDialog,
 }
-const Dialog = ({ dialog, dialogProps, close, children }) => {
+const Dialog = ({ dialog, dialogProps, close, children, fullScreen }) => {
   if (!dialog) {
     return null
   }
   const Comp = MODALS[dialog]
   return (
-    <MuiDialog open={!!dialog} onClose={close} maxWidth="md" fullWidth>
-      <Comp {...dialogProps} />
+    <MuiDialog
+      open={!!dialog}
+      fullScreen={fullScreen}
+      onClose={close}
+      maxWidth="md"
+      fullWidth
+    >
+      <Comp {...dialogProps} close={close} />
     </MuiDialog>
   )
 }
 export default compose(
+  withMobileDialog(),
   connect(
     state => ({
       dialog: state.dialog.dialog,

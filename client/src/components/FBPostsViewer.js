@@ -61,6 +61,7 @@ const settings = {
 
 const FBPostsViewer = ({
   classes,
+  close,
   entityData,
   tagData,
   sourceData,
