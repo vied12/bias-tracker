@@ -92,6 +92,11 @@ class Query(ObjectType):
     all_sentiments = DjangoFilterConnectionField(SentimentReport)
     most_common_entities = DjangoFilterConnectionField(Entity)
     most_common_tags = DjangoFilterConnectionField(Tag)
+    highlighted_entites = DjangoFilterConnectionField(Entity)
+
+    def resolve_highlighted_entites(self, obj, **kwargs):
+        return tags.models.Entity.objects.exclude(highlightedentity=None) \
+            .order_by('highlightedentity__order')
 
     def resolve_most_common_entities(self, obj, **kwargs):
         return tags.models.Entity.objects \
