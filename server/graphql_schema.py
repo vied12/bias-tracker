@@ -13,7 +13,7 @@ class Source(DjangoObjectType):
 
     class Meta:
         model = core.models.Source
-        filter_fields = ['name']
+        filter_fields = ['name', 'country']
         interfaces = (relay.Node, )
 
     def resolve_text_count(self, args):
@@ -21,6 +21,8 @@ class Source(DjangoObjectType):
 
     def resolve_main_entities(self, args, **kwargs):
         return tags.models.Entity.objects.filter(text__source=self) \
+            .exclude(entity_type='Country') \
+            .exclude(entity_type='City') \
             .annotate(count=Count('text')) \
             .filter(count__gt=10).order_by('-count')
 
@@ -46,12 +48,9 @@ class Entity(DjangoObjectType):
         interfaces = (relay.Node, )
 
     def resolve_sources(self, params, **kwargs):
-        return list(
-            core.models.Source.objects.filter(text__entities=self)
-                .annotate(count_entities=Count('text__entities'))
-                .filter(count_entities__gt=5)
-                .distinct()
-        )
+        return core.models.Source.objects.filter(text__entities=self) \
+            .annotate(count_entities=Count('text__entities')) \
+            .filter(count_entities__gt=5)
 
 
 class Tag(DjangoObjectType):
@@ -65,12 +64,9 @@ class Tag(DjangoObjectType):
         interfaces = (relay.Node, )
 
     def resolve_sources(self, params, **kwargs):
-        return list(
-            core.models.Source.objects.filter(text__tags=self)
-                .annotate(count_tags=Count('text__tags'))
+        return core.models.Source.objects.filter(text__tags=self) \
+                .annotate(count_tags=Count('text__tags')) \
                 .filter(count_tags__gt=5)
-                .distinct()
-        )
 
 
 class SentimentReport(DjangoObjectType):

@@ -136,6 +136,8 @@ export default compose(
           id
           name
           facebookPageId
+          country
+          language
           mainEntities(first: 100) {
             edges {
               node {
@@ -145,8 +147,6 @@ export default compose(
               }
             }
           }
-          country
-          language
         }
       }
     `,

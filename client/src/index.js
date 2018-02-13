@@ -9,6 +9,8 @@ import { ApolloProvider } from 'react-apollo'
 import apolloClient from 'utils/apolloClient'
 import 'typeface-bungee'
 import 'typeface-nunito-sans'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 const store = configureStore()
 

@@ -16,9 +16,6 @@ import Loader from 'components/Loader'
 import Score from 'components/Score'
 import { Link } from 'react-router-dom'
 
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-
 const styles = theme => ({
   root: {
     width: '80vw',
