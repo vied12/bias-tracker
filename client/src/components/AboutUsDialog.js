@@ -3,13 +3,7 @@ import { withStyles } from 'material-ui/styles'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
 import compose from 'recompose/compose'
-import { connect } from 'react-redux'
-import * as dialogActions from 'ducks/dialog'
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from 'material-ui/Dialog'
+import { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog'
 
 const styles = theme => ({
   paragraph: {
@@ -20,7 +14,7 @@ const styles = theme => ({
 
 const AboutUsDialog = ({ classes, dialog, close }) => {
   return (
-    <Dialog open={dialog} onClose={close} aria-labelledby="form-dialog-title">
+    <div>
       <DialogTitle id="form-dialog-title">Cosa è Bias Tracker</DialogTitle>
       <DialogContent>
         <Typography className={classes.paragraph}>
@@ -56,18 +50,18 @@ const AboutUsDialog = ({ classes, dialog, close }) => {
           Close
         </Button>
       </DialogActions>
-    </Dialog>
+    </div>
   )
 }
 
 export default compose(
-  withStyles(styles),
-  connect(
-    state => ({
-      dialog: !!state.dialog.dialog,
-    }),
-    dispatch => ({
-      close: () => dispatch(dialogActions.close()),
-    })
-  )
+  withStyles(styles)
+  // connect(
+  //   state => ({
+  //     dialog: state.dialog.dialog === dialogActions.OPEN_ABOUT_US,
+  //   }),
+  //   dispatch => ({
+  //     close: () => dispatch(dialogActions.close()),
+  //   })
+  // )
 )(AboutUsDialog)

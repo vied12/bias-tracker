@@ -12,7 +12,7 @@ const styles = theme => ({
   },
 })
 
-const NextButton = ({
+export const NextButton = ({
   onClick,
   style,
   className,
@@ -35,7 +35,7 @@ const NextButton = ({
   )
 }
 
-const PrevButton = ({
+export const PrevButton = ({
   onClick,
   style,
   className,

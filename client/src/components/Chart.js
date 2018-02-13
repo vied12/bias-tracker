@@ -8,6 +8,8 @@ import green from 'material-ui/colors/green'
 import red from 'material-ui/colors/red'
 import { mean } from 'lodash'
 import Score from 'components/Score'
+import { connect } from 'react-redux'
+import * as dialogActions from 'ducks/dialog'
 
 const styles = theme => ({
   root: {
@@ -18,13 +20,19 @@ const styles = theme => ({
 })
 
 const Chart = ({
+  openViewer,
   theme,
   classes,
+  entity,
+  source,
   data: { loading, allSentiments = { edges: [] } },
 }) => {
   const data = allSentiments.edges.map(({ node }) => ({ val: node.compound }))
   return (
-    <div className={classes.root}>
+    <div
+      className={classes.root}
+      onClick={() => openViewer({ entity, source })}
+    >
       <ResponsiveContainer height={60}>
         <BarChart data={data} stackOffset="sign">
           <Bar isAnimationActive={false} type="monotone" dataKey="val">
@@ -56,5 +64,11 @@ export default compose(
         }
       }
     }
-  `)
+  `),
+  connect(
+    () => ({}),
+    dispatch => ({
+      openViewer: d => dispatch(dialogActions.openFBViewer(d)),
+    })
+  )
 )(Chart)

@@ -24,7 +24,10 @@ keys = [
 ]
 initial = {key: '' for key in keys}
 
-desc = 'Monitor the sentiments expressed in news media posts on social media on selected topics over time.'
+desc = '''Monitora il ‘sentiment’ di una testata giornalistica riguardo
+uno specifico argomento. Vengono presi in esame i post
+pubblicati da una testata sulla propria pagina social in un
+certo arco di tempo.'''
 
 
 class FrontendAppView(View):

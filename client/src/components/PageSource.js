@@ -4,10 +4,8 @@ import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import Grid from 'material-ui/Grid'
 import Tooltip from 'material-ui/Tooltip'
-import Button from 'material-ui/Button'
 import newspaperImg from 'assets/newspaper.jpg'
 import Chart from 'components/Chart'
-import FBPostsViewer from 'components/FBPostsViewer'
 import Loader from 'components/Loader'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -16,9 +14,7 @@ import countrynames from 'country-list'
 const countries = countrynames()
 
 const styles = theme => ({
-  root: {
-    // padding: theme.spacing.unit * 3,
-  },
+  root: {},
   hero: {
     minHeight: '30vh',
     backgroundImage: `url(${newspaperImg})`,
@@ -62,15 +58,8 @@ const styles = theme => ({
 })
 
 class Source extends Component {
-  state = {
-    viewPosts: null,
-  }
-  componentDidUpdate = () => {
-    setTimeout(() => window.FB && window.FB.XFBML.parse(), 2000)
-  }
   render() {
     const { classes, data: { loading, source } } = this.props
-    const { viewPosts } = this.state
     if (loading) {
       return <Loader />
     }
@@ -82,7 +71,7 @@ class Source extends Component {
         </div>
         <div className={classes.body}>
           <Grid container spacing={40}>
-            {source.mainEntities.edges.map(({ node: entityNode }) => [
+            {source.mainEntities.edges.map(({ node: entityNode }) => (
               <Grid
                 item
                 xs={12}
@@ -99,27 +88,9 @@ class Source extends Component {
                     </div>
                   </Tooltip>
                   <Chart entity={entityNode.id} source={source.id} />
-                  <Button
-                    variant="raised"
-                    color="primary"
-                    className={classes.seeMoreBtn}
-                    onClick={() => this.setState({ viewPosts: entityNode.id })}
-                  >
-                    Show posts
-                  </Button>
                 </div>
-              </Grid>,
-              viewPosts === entityNode.id && (
-                <Grid item className={classes.viewPosts} xs={12} key="2">
-                  <Typography variant="title">{entityNode.name}</Typography>
-                  <FBPostsViewer
-                    source={source.id}
-                    entity={entityNode.id}
-                    onCloseRequest={() => this.setState({ viewPosts: null })}
-                  />
-                </Grid>
-              ),
-            ])}
+              </Grid>
+            ))}
           </Grid>
         </div>
       </div>

@@ -19,7 +19,7 @@ const styles = theme => ({
     },
   },
   right: {
-    paddingTop: theme.spacing.unit * 6,
+    paddingTop: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 6,
     paddingRight: theme.spacing.unit * 6,
   },
@@ -52,7 +52,9 @@ class Source extends Component {
           </Grid>
           <Grid item xs={12} md={9} lg={10}>
             <div className={classes.right}>
-              <SearchInput />
+              <div style={{ paddingBottom: 20 }}>
+                <SearchInput />
+              </div>
               <Highlights />
             </div>
           </Grid>

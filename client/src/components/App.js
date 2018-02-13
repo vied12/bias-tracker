@@ -5,7 +5,7 @@ import PageEntity from 'components/PageEntity'
 import PageSource from 'components/PageSource'
 import PageTag from 'components/PageTag'
 import ScrollToTop from 'components/ScrollToTop'
-import AboutUsDialog from 'components/AboutUsDialog'
+import Dialog from 'components/Dialog'
 import history from 'utils/history'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import { Router, Route, Switch } from 'react-router-dom'
@@ -29,7 +29,7 @@ class App extends Component {
                 <Route exact path="/" component={PageHome} />
               </Switch>
             </Layout>
-            <AboutUsDialog />
+            <Dialog />
           </MuiThemeProvider>
         </ScrollToTop>
       </Router>
