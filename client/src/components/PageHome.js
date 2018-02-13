@@ -6,6 +6,7 @@ import Grid from 'material-ui/Grid'
 import AllSources from 'components/AllSources'
 import Highlights from 'components/Highlights'
 import SearchInput from 'components/SearchInput'
+import Hero from 'components/Hero'
 
 const styles = theme => ({
   root: {},
@@ -55,6 +56,7 @@ class Source extends Component {
           </Grid>
         </Grid>
         <div>
+          <Hero title="Our sources" description="And their top concerns" />
           <AllSources />
         </div>
       </div>
