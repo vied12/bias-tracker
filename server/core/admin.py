@@ -13,6 +13,8 @@ class SourceAdmin(admin.ModelAdmin):
         'country',
         'language',
         'created_by',
+        'text_count',
+        'oldest_post',
     )
     list_filter = (
         'language',
@@ -23,6 +25,12 @@ class SourceAdmin(admin.ModelAdmin):
         if not change or not obj.created_by:
             obj.created_by = user
         super(SourceAdmin, self).save_model(request, obj, form, change)
+
+    def text_count(self, obj):
+        return obj.text_set.count()
+
+    def oldest_post(self, obj):
+        return obj.text_set.all().order_by('created')[0].created
 
 
 @admin.register(models.Text)
