@@ -49,6 +49,7 @@ class Entity(DjangoObjectType):
 
     def resolve_sources(self, params, **kwargs):
         return core.models.Source.objects.filter(text__entities=self) \
+            .filter(country='IT') \
             .annotate(count_entities=Count('text__entities')) \
             .filter(count_entities__gt=5)
 
@@ -65,8 +66,9 @@ class Tag(DjangoObjectType):
 
     def resolve_sources(self, params, **kwargs):
         return core.models.Source.objects.filter(text__tags=self) \
-                .annotate(count_tags=Count('text__tags')) \
-                .filter(count_tags__gt=5)
+            .filter(country='IT') \
+            .annotate(count_tags=Count('text__tags')) \
+            .filter(count_tags__gt=5)
 
 
 class SentimentReport(DjangoObjectType):
@@ -96,17 +98,19 @@ class Query(ObjectType):
 
     def resolve_most_common_entities(self, obj, **kwargs):
         return tags.models.Entity.objects \
+            .filter(text__source__country="IT") \
             .annotate(count_text=Count('text', distinct=True)) \
             .annotate(count_sources=Count('text__source__pk', distinct=True)) \
             .order_by('-count_text') \
-            .filter(count_sources__gt=3)
+            .filter(count_sources__gt=2)
 
     def resolve_most_common_tags(self, obj, **kwargs):
         return tags.models.Tag.objects \
+            .filter(text__source__country="IT") \
             .annotate(count_text=Count('text', distinct=True)) \
             .annotate(count_sources=Count('text__source__pk', distinct=True)) \
             .order_by('-count_text') \
-            .filter(count_sources__gt=3)
+            .filter(count_sources__gt=2)
 
 
 schema = Schema(query=Query)

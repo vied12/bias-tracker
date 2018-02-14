@@ -64,7 +64,7 @@ export default compose(
   withStyles(styles),
   graphql(gql`
     query {
-      allSources {
+      allSources(country: "IT") {
         edges {
           node {
             id
