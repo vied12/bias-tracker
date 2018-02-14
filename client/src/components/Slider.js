@@ -12,51 +12,27 @@ const styles = theme => ({
   },
 })
 
-export const NextButton = ({
-  onClick,
-  style,
-  className,
-  currentSlide,
-  slideCount,
-  margin = -40,
-}) => {
-  return (
-    <IconButton
-      onClick={onClick}
-      disabled={currentSlide + settings.slidesToShow >= slideCount}
-      style={{
-        position: 'absolute',
-        right: margin,
-        top: '50%',
-      }}
-    >
-      <NextIcon />
-    </IconButton>
-  )
-}
+const ArrowButton = ({ onClick, margin = -40, disabled, direction, Icon }) => (
+  <IconButton
+    onClick={onClick}
+    disabled={disabled}
+    style={{
+      position: 'absolute',
+      [direction]: margin,
+      top: '50%',
+      transform: 'translate(0,-50%)',
+    }}
+  >
+    <Icon style={{ width: 50, height: 50 }} />
+  </IconButton>
+)
 
-export const PrevButton = ({
-  onClick,
-  style,
-  className,
-  currentSlide,
-  slideCount,
-  margin = -40,
-}) => {
-  return (
-    <IconButton
-      onClick={onClick}
-      disabled={currentSlide === 0}
-      style={{
-        position: 'absolute',
-        left: margin,
-        top: '50%',
-      }}
-    >
-      <PrevIcon />
-    </IconButton>
-  )
-}
+export const NextButton = ({ ...props }) => (
+  <ArrowButton {...props} Icon={NextIcon} direction="right" />
+)
+export const PrevButton = ({ ...props }) => (
+  <ArrowButton {...props} Icon={PrevIcon} direction="left" />
+)
 
 const settings = {
   infinite: false,
