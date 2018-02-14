@@ -30,7 +30,10 @@ class SourceAdmin(admin.ModelAdmin):
         return obj.text_set.count()
 
     def oldest_post(self, obj):
-        return obj.text_set.all().order_by('created')[0].created
+        try:
+            return obj.text_set.all().order_by('created')[0].created
+        except IndexError:
+            return None
 
 
 @admin.register(models.Text)
