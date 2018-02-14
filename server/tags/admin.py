@@ -6,12 +6,6 @@ from django.db.models import Count
 class BaseTag(admin.ModelAdmin):
     search_fields = ('name',)
 
-    def has_add_permission(self, request, obj=None):
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False
-
     def get_ordering(self, request):
         return ('-text_count',)
 
