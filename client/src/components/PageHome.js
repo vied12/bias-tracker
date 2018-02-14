@@ -14,7 +14,7 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 6,
     padding: theme.spacing.unit * 3,
     '& aside': {
-      fontSize: '1.2rem',
+      fontSize: '1rem',
       marginBottom: theme.spacing.unit * 3,
     },
   },
