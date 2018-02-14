@@ -247,12 +247,15 @@ const styles = theme => ({
   // to provide a better implementation.
   // Also, we had to reset the default style injected by the library.
   '@global': {
+    '.Select': {
+      paddingBottom: 1,
+    },
     '.Select-control': {
       display: 'flex',
       alignItems: 'center',
       border: 0,
       height: 'auto',
-      background: 'transparent',
+      padding: 10,
       '&:hover': {
         boxShadow: 'none',
       },
@@ -277,7 +280,6 @@ const styles = theme => ({
       height: 'auto',
     },
     '.Select-input input': {
-      background: 'transparent',
       border: 0,
       padding: 0,
       cursor: 'default',
@@ -290,8 +292,8 @@ const styles = theme => ({
     '.Select-placeholder, .Select--single .Select-value': {
       position: 'absolute',
       top: 0,
-      left: 0,
-      right: 0,
+      left: 10,
+      right: 40,
       bottom: 0,
       display: 'flex',
       alignItems: 'center',
@@ -315,7 +317,6 @@ const styles = theme => ({
     },
     '.Select.is-focused:not(.is-open) > .Select-control': {
       boxShadow: 'none',
-      backgroundColor: 'transparent',
     },
     '.Select-menu': {
       maxHeight: ITEM_HEIGHT * 4.5,
@@ -375,6 +376,7 @@ class IntegrationReactSelect extends React.Component {
       <div className={classes.root}>
         <Input
           fullWidth
+          disableUnderline
           inputComponent={SelectConnected}
           inputProps={{
             classes,
