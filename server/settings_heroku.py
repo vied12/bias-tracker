@@ -8,6 +8,7 @@ MIDDLEWARE = MIDDLEWARE + [  # noqa
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+SECURE_SSL_REDIRECT = True
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
