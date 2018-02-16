@@ -112,7 +112,7 @@ class Query(ObjectType):
 
     def resolve_most_common_tags(self, obj, **kwargs):
         return tags.models.Tag.objects \
-            .filter(text__source__country="IT") \
+            .filter(text__source__is_enabled=True, text__source__country="IT") \
             .annotate(count_text=Count('text', distinct=True)) \
             .annotate(count_sources=Count('text__source__pk', distinct=True)) \
             .order_by('-count_text') \
