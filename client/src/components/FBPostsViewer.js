@@ -45,6 +45,11 @@ const styles = theme => ({
   red: {
     color: red[500],
   },
+  gridContainer: {
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column-reverse',
+    },
+  },
 })
 
 const settings = {
@@ -91,7 +96,7 @@ const FBPostsViewer = ({
           <Slider {...settings}>
             {postsData.allTexts.edges.map(({ node }) => (
               <div className={classes.slide} key={node.id}>
-                <Grid container>
+                <Grid container className={classes.gridContainer}>
                   <Grid item xs={12} md={3}>
                     <div>
                       <Typography variant="title" className={classes.title}>

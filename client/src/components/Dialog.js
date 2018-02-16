@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import * as dialogActions from 'ducks/dialog'
 import FBPostsViewer from 'components/FBPostsViewer'
 import AboutUsDialog from 'components/AboutUsDialog'
+import IconButton from 'material-ui/IconButton'
+import CloseIcon from 'material-ui-icons/Close'
 
 const MODALS = {
   [dialogActions.OPEN_FB_VIEWER]: FBPostsViewer,
@@ -23,6 +25,11 @@ const Dialog = ({ dialog, dialogProps, close, children, fullScreen }) => {
       maxWidth="md"
       fullWidth
     >
+      <div style={{ textAlign: 'right' }}>
+        <IconButton onClick={close}>
+          <CloseIcon />
+        </IconButton>
+      </div>
       <Comp {...dialogProps} close={close} />
     </MuiDialog>
   )
