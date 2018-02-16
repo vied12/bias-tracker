@@ -39,7 +39,8 @@ const AboutUsDialog = ({ classes, dialog, close }) => {
         <Typography className={classes.paragraph}>
           Il progetto è una collaborazione tra Ugo Barbàra e Arcangelo Rociola,
           giornalisti di Agi; l'Università di Urbino e gli sviluppatori di
-          software Edouard Richard e Douglas Arellanes.
+          software <a href="https://vied12.github.io/">Edouard Richard</a> e
+          Douglas Arellanes.
         </Typography>
         <Typography className={classes.paragraph}>
           E’ reso possibile grazie a un finanziamento di TechCamp
