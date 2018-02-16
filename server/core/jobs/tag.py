@@ -19,7 +19,8 @@ def tag(text_id):
         headers={
             'X-AG-Access-Token': settings.OPEN_CALAIS_KEY,
             'Content-Type': 'text/raw',
-            'outputformat': 'application/json'
+            'outputformat': 'application/json',
+            'x-calais-language': 'English',
         },
         timeout=80,
     )
