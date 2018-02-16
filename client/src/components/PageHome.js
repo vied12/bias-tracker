@@ -50,7 +50,7 @@ class Source extends Component {
               </Typography>
               <Typography variant="body2">
               Bias Tracker raccoglie gli elementi testuali dalle pagine Facebook
-              di XX testate italiane. Vengono analizzate per estrarre automaticamente
+              di 12 testate italiane. Vengono analizzate per estrarre automaticamente
               gli argomenti e determinare il sentiment delle parole. Per farlo viene
               usato uno strumento che sfrutta l’intelligenza artificiale. Questi
               elementi vengono poi combinati per creare i grafici che vedere qui.
