@@ -23,6 +23,11 @@ class Source(models.Model):
     language = models.CharField(max_length=128, choices=((_, _) for _ in LANGUAGES), db_index=True)
     facebook_page_id = models.CharField(max_length=255)
     url = models.URLField('url of the media', null=True)
+    is_enabled = models.BooleanField(
+        'Show on the website',
+        help_text='Enable the collect of the posts and display the source on the site',
+        default=True
+    )
 
     def __str__(self):
         return '{}'.format(self.name)

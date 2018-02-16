@@ -20,7 +20,8 @@ class Source(DjangoObjectType):
         return self.text_set.all().count()
 
     def resolve_main_entities(self, args, **kwargs):
-        return tags.models.Entity.objects.filter(text__source=self) \
+        return tags.models.Entity.objects \
+            .filter(text__source=self, text__source__is_enabled=True) \
             .exclude(entity_type='Country') \
             .exclude(entity_type='City') \
             .annotate(count=Count('text')) \
@@ -49,6 +50,7 @@ class Entity(DjangoObjectType):
 
     def resolve_sources(self, params, **kwargs):
         return core.models.Source.objects.filter(text__entities=self) \
+            .filter(is_enabled=True) \
             .filter(country='IT') \
             .annotate(count_entities=Count('text__entities')) \
             .filter(count_entities__gt=5)
@@ -66,6 +68,7 @@ class Tag(DjangoObjectType):
 
     def resolve_sources(self, params, **kwargs):
         return core.models.Source.objects.filter(text__tags=self) \
+            .filter(is_enabled=True) \
             .filter(country='IT') \
             .annotate(count_tags=Count('text__tags')) \
             .filter(count_tags__gt=5)
@@ -92,12 +95,16 @@ class Query(ObjectType):
     most_common_tags = DjangoFilterConnectionField(Tag)
     highlighted_entites = DjangoFilterConnectionField(Entity)
 
+    def resolve_all_sources(self, obj, **kwargs):
+        return core.models.Source.objects.filter(is_enabled=True)
+
     def resolve_highlighted_entites(self, obj, **kwargs):
         return tags.models.Entity.objects.exclude(highlightedentity=None) \
             .order_by('highlightedentity__order')
 
     def resolve_most_common_entities(self, obj, **kwargs):
         return tags.models.Entity.objects \
+            .filter(text__source__is_enabled=True) \
             .filter(text__source__country="IT") \
             .annotate(count_text=Count('text', distinct=True)) \
             .annotate(count_sources=Count('text__source__pk', distinct=True)) \

@@ -15,8 +15,10 @@ class SourceAdmin(admin.ModelAdmin):
         'created_by',
         'text_count',
         'oldest_post',
+        'is_enabled',
     )
     list_filter = (
+        'is_enabled',
         'language',
     )
 

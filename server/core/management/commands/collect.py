@@ -6,7 +6,7 @@ class Command(BaseCommand):
     help = 'Collect Texts'
 
     def handle(self, *args, **options):
-        for index, source in enumerate(models.Source.objects.all()):
+        for index, source in enumerate(models.Source.objects.filter(is_enabled=True)):
             self.stdout.write('{}/{} {}'.format(index, models.Source.objects.all().count(), source))
             jobs.collect(source.id)
         self.stdout.write(self.style.SUCCESS('done'))
