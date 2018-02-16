@@ -5,7 +5,7 @@ import requests
 
 
 @job
-def collect(source_id):
+def collect(source_id, force=False):
     source = Source.objects.get(pk=source_id)
 
     fields = [
@@ -61,7 +61,8 @@ def collect(source_id):
                 )
                 text.save()
             else:
-                return
+                if not force:
+                    return
         if page_counter > 1:
             fetch_url(req['paging']['next'], source, page_counter - 1)
 
