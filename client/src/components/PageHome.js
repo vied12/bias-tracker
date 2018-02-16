@@ -48,6 +48,14 @@ class Source extends Component {
                 punti più alti o più bassi nel grafico, indicano ‘sentiment’ più
                 positivo o negativo.
               </Typography>
+              <Typography variant="body2">
+              Bias Tracker raccoglie gli elementi testuali dalle pagine Facebook
+              di XX testate italiane. Vengono analizzate per estrarre automaticamente
+              gli argomenti e determinare il sentiment delle parole. Per farlo viene
+              usato uno strumento che sfrutta l’intelligenza artificiale. Questi
+              elementi vengono poi combinati per creare i grafici che vedere qui.
+              Cliccando sui grafici avrete il dettaglio del singolo post.
+              </Typography>
             </div>
           </Grid>
           <Grid item xs={12} md={9} lg={10}>
