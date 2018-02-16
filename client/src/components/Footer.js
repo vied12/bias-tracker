@@ -45,10 +45,10 @@ function Footer(props) {
         <Typography variant="subheading" style={{ padding: '8px 16px' }}>
           Credits
         </Typography>
-        <Button component={Link} to="http://ifg.uniurb.it/">
+        <Button href="http://ifg.uniurb.it/">
           Istituto per la formazione al giornalismo di Urbino
         </Button>
-        <Button component={Link} to="https://elezioni2018.news/">
+        <Button href="https://elezioni2018.news/">
           Elezioni 2018: Mapping Italian News
         </Button>
       </div>
