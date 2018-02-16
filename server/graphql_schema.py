@@ -5,6 +5,7 @@ from graphene_django.filter import DjangoFilterConnectionField
 import core.models
 import tags.models
 from django.db.models import Count
+from graphene_django.debug import DjangoDebug
 
 
 class Source(DjangoObjectType):
@@ -49,9 +50,8 @@ class Entity(DjangoObjectType):
         interfaces = (relay.Node, )
 
     def resolve_sources(self, params, **kwargs):
-        return core.models.Source.objects.filter(text__entities=self) \
-            .filter(is_enabled=True) \
-            .filter(country='IT') \
+        return core.models.Source.objects \
+            .filter(text__entities=self, is_enabled=True, country='IT') \
             .annotate(count_entities=Count('text__entities')) \
             .filter(count_entities__gt=5)
 
@@ -67,9 +67,8 @@ class Tag(DjangoObjectType):
         interfaces = (relay.Node, )
 
     def resolve_sources(self, params, **kwargs):
-        return core.models.Source.objects.filter(text__tags=self) \
-            .filter(is_enabled=True) \
-            .filter(country='IT') \
+        return core.models.Source.objects \
+            .filter(text__tags=self, is_enabled=True, country='IT') \
             .annotate(count_tags=Count('text__tags')) \
             .filter(count_tags__gt=5)
 
@@ -94,6 +93,7 @@ class Query(ObjectType):
     most_common_entities = DjangoFilterConnectionField(Entity)
     most_common_tags = DjangoFilterConnectionField(Tag)
     highlighted_entites = DjangoFilterConnectionField(Entity)
+    debug = graphene.Field(DjangoDebug, name='__debug')
 
     def resolve_all_sources(self, obj, **kwargs):
         return core.models.Source.objects.filter(is_enabled=True)
