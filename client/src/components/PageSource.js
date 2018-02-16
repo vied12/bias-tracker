@@ -67,7 +67,11 @@ class Source extends Component {
       <div className={classes.root}>
         <div className={classes.hero}>
           <Typography variant="title">{source.name}</Typography>
-          <Typography>{countries.getName(source.country)}</Typography>
+          <Typography>
+            {source.country === 'IT'
+              ? 'Italia'
+              : countries.getName(source.country)}
+          </Typography>
         </div>
         <div className={classes.body}>
           <Grid container spacing={40}>
