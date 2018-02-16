@@ -68,7 +68,7 @@ class Source extends Component {
           </Grid>
         </Grid>
         <div>
-          <Hero title="Fonti" description="i loro temi principali" />
+          <Hero title="Le fonti" description="e i loro temi principali" />
           <AllSources />
         </div>
       </div>
