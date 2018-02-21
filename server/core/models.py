@@ -64,6 +64,8 @@ class Text(models.Model):
             self.link_description,
         ) if _))
 
+    class Meta:
+        ordering = ('created',)
 
 class SentimentReport(models.Model):
     # meta
