@@ -26,7 +26,7 @@ class Source(DjangoObjectType):
             .exclude(entity_type='Country') \
             .exclude(entity_type='City') \
             .annotate(count=Count('text')) \
-            .filter(count__gt=10).order_by('-count')
+            .filter(count__gte=5).order_by('-count')
 
 
 class Text(DjangoObjectType):
