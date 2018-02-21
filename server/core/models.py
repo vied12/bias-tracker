@@ -65,7 +65,7 @@ class Text(models.Model):
         ) if _))
 
     class Meta:
-        ordering = ('created',)
+        ordering = ('-created',)
 
 class SentimentReport(models.Model):
     # meta
