@@ -32,18 +32,16 @@ class EntityAdmin(BaseTag):
         'text_count',
         'source_count',
     )
-    readonly_fields = ('name', 'entity_type')
     list_filter = ('entity_type',)
 
 
 @admin.register(models.Topic)
 class TopicAdmin(BaseTag):
-    readonly_fields = ('name',)
+    pass
 
 
 @admin.register(models.Tag)
 class TagAdmin(BaseTag):
-    readonly_fields = ('name',)
     list_display = (
         'name',
         'text_count',
