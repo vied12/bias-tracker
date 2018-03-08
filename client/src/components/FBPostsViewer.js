@@ -64,28 +64,14 @@ const settings = {
   prevArrow: <PrevButton margin={-50} />,
 }
 
-const FBPostsViewer = ({
-  classes,
-  close,
-  entityData,
-  tagData,
-  sourceData,
-  postsData,
-}) => {
-  if (
-    sourceData.loading ||
-    postsData.loading ||
-    get(entityData, 'loading') ||
-    get(tagData, 'loading')
-  ) {
+const FBPostsViewer = ({ classes, close, tagData, sourceData, postsData }) => {
+  if (sourceData.loading || postsData.loading || get(tagData, 'loading')) {
     return <Loader />
   }
   const title = (
     <div>
       <Typography>{sourceData.source.name}</Typography>
-      <Typography variant="title">
-        {get(tagData, 'tag.name', false) || get(entityData, 'entity.name')}
-      </Typography>
+      <Typography variant="title">{get(tagData, 'tag.name', false)}</Typography>
     </div>
   )
   return (
@@ -125,18 +111,6 @@ const FBPostsViewer = ({
                         </span>
                       </Typography>
                     </div>
-                    <Typography variant="title" className={classes.title}>
-                      Entities
-                    </Typography>
-                    {node.entities.edges.map(({ node: entityNode }) => (
-                      <Button
-                        component={Link}
-                        to={`/entity/${entityNode.id}`}
-                        key={entityNode.id}
-                      >
-                        {entityNode.name}
-                      </Button>
-                    ))}
                     <Typography variant="title" className={classes.title}>
                       Tags
                     </Typography>
@@ -188,8 +162,8 @@ export default compose(
   withStyles(styles),
   graphql(
     gql`
-      query getFBPosts($entity: [ID], $tag: [ID], $source: ID!) {
-        allTexts(source: $source, entities: $entity, tags: $tag) {
+      query getFBPosts($tag: [ID], $source: ID!) {
+        allTexts(source: $source, tags: $tag) {
           edges {
             node {
               id
@@ -203,15 +177,6 @@ export default compose(
                 pos
                 neg
                 compound
-              }
-              entities {
-                edges {
-                  node {
-                    id
-                    name
-                    entityType
-                  }
-                }
               }
               tags {
                 edges {
@@ -243,22 +208,6 @@ export default compose(
     `,
     {
       name: 'sourceData',
-    }
-  ),
-  graphql(
-    gql`
-      query getEntityFB($entity: ID!) {
-        entity(id: $entity) {
-          id
-          name
-        }
-      }
-    `,
-    {
-      name: 'entityData',
-      options: props => ({
-        skip: !props.entity,
-      }),
     }
   ),
   graphql(
