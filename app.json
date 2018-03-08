@@ -14,7 +14,7 @@
     "NODE_PATH": {
       "required": true
     },
-    "FACEBOOK_APP_ID:": {
+    "FACEBOOK_APP_ID": {
       "required": true
     },
     "FACEBOOK_APP_SECRET": {
@@ -22,11 +22,14 @@
     },
     "OPEN_CALAIS_KEY": {
       "required": true
+    },
+    "GOOGLE_KEY": {
+      "required": true
     }
   },
   "addons": [
     "heroku-postgresql",
-    "sendgrid",
+    "redistogo"
   ],
   "buildpacks": [
     {

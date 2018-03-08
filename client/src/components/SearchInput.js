@@ -42,23 +42,11 @@ class Option extends React.Component {
 }
 
 function SelectWrapped(props) {
-  const {
-    classes,
-    defaultTagsData,
-    defaultEntitiesData,
-    entitiesData,
-    tagsData,
-    ...other
-  } = props
+  const { classes, defaultTagsData, tagsData, ...other } = props
   let options = []
-  if (
-    entitiesData &&
-    tagsData &&
-    tagsData.allTags &&
-    entitiesData.allEntities
-  ) {
+  if (tagsData && tagsData.allTags) {
     options = [
-      ...entitiesData.allEntities.edges.map(({ node }) => ({
+      ...tagsData.allTags.edges.map(({ node }) => ({
         label: (
           <div>
             {node.name}{' '}
@@ -69,44 +57,13 @@ function SelectWrapped(props) {
         ),
         value: node.id,
       })),
-      ...tagsData.allTags.edges.map(({ node }) => ({
-        label: (
-          <div>
-            {node.name}{' '}
-            <Typography variant="caption" component="span">
-              tag
-            </Typography>
-          </div>
-        ),
-        value: node.id,
-      })),
     ]
   } else {
     options = [
-      ...(defaultEntitiesData.loading
-        ? []
-        : defaultEntitiesData.mostCommonEntities.edges.map(({ node }) => ({
-            label: (
-              <div>
-                {node.name}{' '}
-                <Typography variant="caption" component="span">
-                  {node.entityType}
-                </Typography>
-              </div>
-            ),
-            value: node.id,
-          }))),
       ...(defaultTagsData.loading
         ? []
         : defaultTagsData.mostCommonTags.edges.map(({ node }) => ({
-            label: (
-              <div>
-                {node.name}{' '}
-                <Typography variant="caption" component="span">
-                  tag
-                </Typography>
-              </div>
-            ),
+            label: <div>{node.name}</div>,
             value: node.id,
           }))),
     ]
@@ -151,35 +108,12 @@ function SelectWrapped(props) {
 const SelectConnected = compose(
   graphql(
     gql`
-      query searchEntities($keyword: String!) {
-        allEntities(name_Icontains: $keyword, first: 5) {
-          edges {
-            node {
-              id
-              entityType
-              name
-            }
-          }
-        }
-      }
-    `,
-    {
-      name: 'entitiesData',
-      options: props => ({
-        variables: {
-          keyword: props.inputValue,
-        },
-        skip: !props.inputValue || props.inputValue === '',
-      }),
-    }
-  ),
-  graphql(
-    gql`
       query searchTags($keyword: String!) {
         allTags(name_Icontains: $keyword, first: 5) {
           edges {
             node {
               id
+              entityType
               name
             }
           }
@@ -199,29 +133,12 @@ const SelectConnected = compose(
   graphql(
     gql`
       query defaultEntities {
-        mostCommonEntities(first: 50) {
-          edges {
-            node {
-              id
-              name
-              entityType
-            }
-          }
-        }
-      }
-    `,
-    {
-      name: 'defaultEntitiesData',
-    }
-  ),
-  graphql(
-    gql`
-      query defaultTags {
         mostCommonTags(first: 50) {
           edges {
             node {
               id
               name
+              entityType
             }
           }
         }

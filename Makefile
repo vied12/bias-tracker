@@ -3,7 +3,6 @@ MANAGE = ./server/manage.py
 install:
 	virtualenv env --python python3
 	. env/bin/activate ; pip install -r requirements.txt
-	. env/bin/activate ; pip freeze > requirements.txt
 	yarn install
 
 run: graphql_schema runserver

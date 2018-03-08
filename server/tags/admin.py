@@ -24,26 +24,17 @@ class BaseTag(admin.ModelAdmin):
     source_count.admin_order_field = 'source_count'
 
 
-@admin.register(models.Entity)
-class EntityAdmin(BaseTag):
-    list_display = (
-        'name',
-        'entity_type',
-        'text_count',
-        'source_count',
-    )
-    list_filter = ('entity_type',)
-
-
-@admin.register(models.Topic)
-class TopicAdmin(BaseTag):
-    pass
-
-
 @admin.register(models.Tag)
 class TagAdmin(BaseTag):
     list_display = (
         'name',
+        'tag_type',
+        'entity_type',
         'text_count',
         'source_count',
+        'hide',
+    )
+    list_filter = (
+        'tag_type',
+        'hide',
     )

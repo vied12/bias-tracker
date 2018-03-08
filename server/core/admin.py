@@ -63,9 +63,6 @@ class TextAdmin(admin.ModelAdmin):
     )
     list_filter = (
         'source__name',
-        # 'entities__name',
-        'topics__name',
-        # 'tags__name',
 
     )
     date_hierarchy = 'created'
@@ -82,23 +79,13 @@ class TextAdmin(admin.ModelAdmin):
         model = models.Text.tags.through
         extra = 0
 
-    class EntitiesInline(admin.TabularInline):
-        raw_id_fields = ('entity', )
-        model = models.Text.entities.through
-        extra = 0
-
-    class TopicsInline(admin.TabularInline):
-        raw_id_fields = ('topic', )
-        model = models.Text.topics.through
-        extra = 0
-
     class SentimentInline(admin.TabularInline):
         readonly_fields = ('added', 'compound', 'pos', 'neu', 'neg')
         model = models.SentimentReport
         extra = 0
 
-    inlines = (SentimentInline, EntitiesInline, TopicsInline, TagsInline)
-    exclude = ('tags', 'topics', 'entities')
+    inlines = (SentimentInline, TagsInline)
+    exclude = ('tags',)
 
 
 @admin.register(models.SentimentReport)
@@ -114,12 +101,10 @@ class SentimentReportAdmin(admin.ModelAdmin):
     )
     list_filter = (
         'text__source__name',
-        'text__entities__name',
+        'text__tags__name',
     )
     search_fields = (
         'text__source__name',
         'text__message',
-        'text__topics__name',
-        'text__entities__name',
         'text__tags__name',
     )

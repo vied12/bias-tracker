@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PageHome from 'components/PageHome'
 import Layout from 'components/Layout'
-import PageEntity from 'components/PageEntity'
 import PageSource from 'components/PageSource'
 import PageTag from 'components/PageTag'
 import ScrollToTop from 'components/ScrollToTop'
@@ -23,7 +22,6 @@ class App extends Component {
             <Reboot />
             <Layout>
               <Switch>
-                <Route path="/entity/:entity" component={PageEntity} />
                 <Route path="/tag/:tag" component={PageTag} />
                 <Route path="/source/:source" component={PageSource} />
                 <Route exact path="/" component={PageHome} />
