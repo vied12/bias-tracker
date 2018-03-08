@@ -75,23 +75,23 @@ class Source extends Component {
         </div>
         <div className={classes.body}>
           <Grid container spacing={40}>
-            {source.mainEntities.edges.map(({ node: entityNode }) => (
+            {source.mainTags.edges.map(({ node: tagNode }) => (
               <Grid
                 item
                 xs={12}
                 sm={6}
                 md={3}
                 lg={2}
-                key={entityNode.id}
+                key={tagNode.id}
                 className={classes.entity}
               >
                 <div>
-                  <Tooltip title={entityNode.entityType} placement="top">
+                  <Tooltip title={tagNode.entityType} placement="top">
                     <div className={classes.entityName}>
-                      <Typography variant="title">{entityNode.name}</Typography>
+                      <Typography variant="title">{tagNode.name}</Typography>
                     </div>
                   </Tooltip>
-                  <Chart entity={entityNode.id} source={source.id} />
+                  <Chart entity={tagNode.id} source={source.id} />
                 </div>
               </Grid>
             ))}
@@ -113,7 +113,7 @@ export default compose(
           facebookPageId
           country
           language
-          mainEntities(first: 100) {
+          mainTags(first: 100) {
             edges {
               node {
                 id
