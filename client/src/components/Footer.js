@@ -40,6 +40,7 @@ function Footer(props) {
       </Button>
       <div className={classes.siteMap}>
         <Button onClick={openAboutUs}>Che cosa è</Button>
+        <Button href="https://github.com/vied12/bias-tracker">Github</Button>
       </div>
       <div className={classes.siteMap}>
         <Typography variant="subheading" style={{ padding: '8px 16px' }}>
