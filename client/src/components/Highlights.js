@@ -16,14 +16,14 @@ const styles = theme => ({
 })
 const Highlights = ({
   classes,
-  entitiesData: { loading: entitiesLoading, highlightedEntites },
+  tagsData: { loading: entitiesLoading, highlightedTags },
 }) => {
   if (entitiesLoading) {
     return <Loader />
   }
   return (
     <div className={classes.root}>
-      {[...highlightedEntites.edges].map(({ node }) => (
+      {[...highlightedTags.edges].map(({ node }) => (
         <div className={classes.row} key={node.id}>
           <Entity node={node} withSlider />
         </div>
@@ -53,14 +53,14 @@ export default compose(
   withStyles(styles),
   graphql(
     gql`
-    query HighlightedEntites {
-      highlightedEntites {
+    query HighlightedTags {
+      highlightedTags {
         ${query}
       }
     }
   `,
     {
-      name: 'entitiesData',
+      name: 'tagsData',
     }
   )
 )(Highlights)

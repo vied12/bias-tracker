@@ -17,7 +17,7 @@ const styles = theme => ({
   row: {
     marginBottom: theme.spacing.unit * 3,
   },
-  entity: {
+  tag: {
     fontSize: '1rem',
   },
   sourceTitle: {
@@ -45,12 +45,12 @@ const Sources = ({ classes, data: { loading, allSources } }) => {
             <Typography variant="headline">{node.name}</Typography>
           </Button>
           <Slider>
-            {node.mainEntities.edges.map(({ node: entityNode }) => (
-              <div key={entityNode.id}>
-                <Typography variant="title" className={classes.entity}>
-                  {entityNode.name}
+            {node.mainTags.edges.map(({ node: tagNode }) => (
+              <div key={tagNode.id}>
+                <Typography variant="title" className={classes.tag}>
+                  {tagNode.name}
                 </Typography>
-                <Chart entity={entityNode.id} source={node.id} />
+                <Chart tag={tagNode.id} source={node.id} />
               </div>
             ))}
           </Slider>
@@ -72,7 +72,7 @@ export default compose(
             country
             language
             url
-            mainEntities(first: 8) {
+            mainTags(first: 8) {
               edges {
                 node {
                   id

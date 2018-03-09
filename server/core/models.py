@@ -42,8 +42,6 @@ class Text(models.Model):
     facebook_id = models.CharField(max_length=255, db_index=True)
     # tags
     tags = models.ManyToManyField('tags.Tag')
-    topics = models.ManyToManyField('tags.Topic')
-    entities = models.ManyToManyField('tags.Entity')
     # data
     message = models.TextField(null=True)
     link_description = models.TextField(null=True)
@@ -66,6 +64,7 @@ class Text(models.Model):
 
     class Meta:
         ordering = ('-created',)
+
 
 class SentimentReport(models.Model):
     # meta

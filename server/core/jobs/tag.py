@@ -1,7 +1,7 @@
 from django_rq import job
 import requests
 from core.models import Text
-from tags.models import Entity, Topic, Tag
+from tags.models import Tag
 from django.conf import settings
 import time
 
@@ -30,6 +30,7 @@ def tag(text_id):
     topics = [
         {
             'name': _['name'],
+            'tag_type': 'topic',
         }
         for _ in response.values() if _.get('_typeGroup') == 'topics'
         # and _['forenduserdisplay'] == 'true'
@@ -38,6 +39,7 @@ def tag(text_id):
     tags = [
         {
             'name': _['name'],
+            'tag_type': 'tag',
         }
         for _ in response.values() if _.get('_typeGroup') == 'socialTag'
         and _['forenduserdisplay'] == 'true'
@@ -46,15 +48,16 @@ def tag(text_id):
     entities = [
         {
             'name': _['name'],
+            'tag_type': 'entity',
             'entity_type': _['_type'],
         }
         for _ in response.values() if _.get('_typeGroup') == 'entities'
         and _['forenduserdisplay'] == 'true'
     ]
     for model, array in (
-        (Topic, topics),
+        (Tag, topics),
         (Tag, tags),
-        (Entity, entities),
+        (Tag, entities),
     ):
         for item in array:
             obj, created = model.objects.get_or_create(**item)

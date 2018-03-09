@@ -23,17 +23,13 @@ const Chart = ({
   openViewer,
   theme,
   classes,
-  entity,
   tag,
   source,
   data: { loading, allSentiments = { edges: [] } },
 }) => {
   const data = allSentiments.edges.map(({ node }) => ({ val: node.compound }))
   return (
-    <div
-      className={classes.root}
-      onClick={() => openViewer({ entity, source, tag })}
-    >
+    <div className={classes.root} onClick={() => openViewer({ source, tag })}>
       <ResponsiveContainer height={60}>
         <BarChart data={data} stackOffset="sign">
           <Bar isAnimationActive={false} type="monotone" dataKey="val">
@@ -51,12 +47,8 @@ const Chart = ({
 export default compose(
   withStyles(styles, { withTheme: true }),
   graphql(gql`
-    query getReportsForChart($entity: [ID], $tag: [ID], $source: ID!) {
-      allSentiments(
-        text_Source: $source
-        text_Entities: $entity
-        text_Tags: $tag
-      ) {
+    query getReportsForChart($tag: [ID], $source: ID!) {
+      allSentiments(text_Source: $source, text_Tags: $tag, first: 200) {
         edges {
           node {
             id

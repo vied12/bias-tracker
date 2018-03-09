@@ -6,7 +6,6 @@ import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
 import Chart from 'components/Chart'
 import { Link } from 'react-router-dom'
-import { fromGlobalId } from 'graphql-relay-tools'
 import Slider from 'components/Slider'
 
 const styles = theme => ({
@@ -19,7 +18,6 @@ const styles = theme => ({
 })
 
 const renderSources = ({ classes, sources, node }) => {
-  const { type } = fromGlobalId(node.id)
   return node.sources.edges.map(({ node: sourceNode }) => (
     <div key={sourceNode.id}>
       <div>
@@ -30,24 +28,19 @@ const renderSources = ({ classes, sources, node }) => {
         >
           <Typography variant="headline">{sourceNode.name}</Typography>
         </Button>
-        <Chart
-          entity={type === 'Entity' ? node.id : undefined}
-          tag={type === 'Tag' ? node.id : undefined}
-          source={sourceNode.id}
-        />
+        <Chart tag={node.id} source={sourceNode.id} />
       </div>
     </div>
   ))
 }
 
 const Tagging = ({ classes, node, withSlider }) => {
-  const { type } = fromGlobalId(node.id)
   return (
     <div key={node.id} className={classes.root}>
       <div className={classes.entityTitle}>
         <Button
           component={Link}
-          to={`/${type.toLowerCase()}/${node.id}`}
+          to={`/tag/${node.id}`}
           className={classes.titleBtn}
         >
           <Typography variant="title">{node.name}</Typography>
