@@ -79,6 +79,14 @@ class Query(ObjectType):
     def resolve_all_sources(self, obj, **kwargs):
         return core.models.Source.objects.filter(is_enabled=True)
 
+    def resolve_all_tags(self, obj, **kwargs):
+        return tags.models.Tag.objects \
+            .filter(hide=False, text__source__is_enabled=True, text__source__country="IT") \
+            .annotate(count_text=Count('text', distinct=True)) \
+            .annotate(count_sources=Count('text__source__pk', distinct=True)) \
+            .order_by('-count_text') \
+            .filter(count_sources__gt=2)
+
     def resolve_highlighted_tags(self, obj, **kwargs):
         return tags.models.Tag.objects.exclude(highlightedtag=None) \
             .order_by('highlightedtag__order')
