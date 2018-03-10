@@ -15,8 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from views import FrontendAppView, SourceView, TagView, EntityView
-from graphene_django.views import GraphQLView
+from views import FrontendAppView, SourceView, TagView, EntityView, GraphQLView
 from graphql_schema import schema
 from django.views.decorators.csrf import csrf_exempt
 
