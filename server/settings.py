@@ -151,9 +151,9 @@ REST_FRAMEWORK = {
 }
 
 GRAPHENE = {
-    'MIDDLEWARE': [
-        'graphene_django.debug.DjangoDebugMiddleware',
-    ],
+    # 'MIDDLEWARE': [
+    #     'graphene_django.debug.DjangoDebugMiddleware',
+    # ],
     'RELAY_CONNECTION_MAX_LIMIT': 200
 }
 

@@ -12,6 +12,10 @@ import django.utils.html
 from graphql_relay.node.node import from_global_id
 import core.models
 import tags.models
+import hashlib
+from django.core.cache import cache
+import json
+from graphene_django.views import GraphQLView
 
 keys = [
     '__OG_TITLE__',
@@ -108,3 +112,20 @@ def get_template(meta={}):
             """,
             status=501,
         )
+
+
+def get_cache_key(entry):
+    m = hashlib.md5()
+    m.update(json.dumps(entry, sort_keys=True).encode('utf8'))
+    return m.hexdigest()
+
+
+class GraphQLView(GraphQLView):
+    def get_response(self, request, entry, *args, **kwargs):
+        key = get_cache_key(entry)
+        result = cache.get(key)
+        if not result:
+            result = super(GraphQLView, self).get_response(request, entry)
+            if result[1] == 200:
+                cache.set(key, result, 60 * 60)
+        return result
