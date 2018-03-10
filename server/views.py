@@ -45,6 +45,9 @@ class FrontendAppView(View):
         return get_template({
             '__OG_TITLE__': 'BiasTracker',
             '__OG_DESCRIPTION__': desc,
+            '__OG_IMAGE__': request.build_absolute_uri(settings.STATIC_URL + 'favicon.png'),
+            '__OG_IMAGE_WIDTH__': 400,
+            '__OG_IMAGE_HEIGHT__': 400,
             '__OG_TYPE__': 'website',
             '__OG_URL__': request.build_absolute_uri(reverse('home')),
         })
@@ -57,6 +60,9 @@ class SourceView(FrontendAppView):
         return get_template({
             '__OG_TITLE__': '{} | BiasTracker'.format(source.name),
             '__OG_DESCRIPTION__': desc,
+            '__OG_IMAGE__': request.build_absolute_uri(settings.STATIC_URL + 'favicon.png'),
+            '__OG_IMAGE_WIDTH__': 400,
+            '__OG_IMAGE_HEIGHT__': 400,
             '__OG_TYPE__': 'website',
             '__OG_URL__': request.build_absolute_uri(reverse('source', kwargs={'id': params['id']})),
         })
@@ -69,6 +75,9 @@ class EntityView(FrontendAppView):
         return get_template({
             '__OG_TITLE__': '{} | BiasTracker'.format(entity.name),
             '__OG_DESCRIPTION__': desc,
+            '__OG_IMAGE__': request.build_absolute_uri(settings.STATIC_URL + 'favicon.png'),
+            '__OG_IMAGE_WIDTH__': 400,
+            '__OG_IMAGE_HEIGHT__': 400,
             '__OG_TYPE__': 'website',
             '__OG_URL__': request.build_absolute_uri(reverse('entity', kwargs={'id': params['id']})),
         })
@@ -81,6 +90,9 @@ class TagView(FrontendAppView):
         return get_template({
             '__OG_TITLE__': '{} | BiasTracker'.format(tag.name),
             '__OG_DESCRIPTION__': desc,
+            '__OG_IMAGE__': request.build_absolute_uri(settings.STATIC_URL + 'favicon.png'),
+            '__OG_IMAGE_WIDTH__': 400,
+            '__OG_IMAGE_HEIGHT__': 400,
             '__OG_TYPE__': 'website',
             '__OG_URL__': request.build_absolute_uri(reverse('tag', kwargs={'id': params['id']})),
         })
