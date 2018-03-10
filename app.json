@@ -29,6 +29,7 @@
   },
   "addons": [
     "heroku-postgresql",
+    "memcachier",
     "redistogo"
   ],
   "buildpacks": [
