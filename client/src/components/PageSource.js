@@ -91,7 +91,7 @@ class Source extends Component {
                       <Typography variant="title">{tagNode.name}</Typography>
                     </div>
                   </Tooltip>
-                  <Chart entity={tagNode.id} source={source.id} />
+                  <Chart tag={tagNode.id} source={source.id} />
                 </div>
               </Grid>
             ))}

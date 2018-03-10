@@ -47,7 +47,7 @@ const Chart = ({
 export default compose(
   withStyles(styles, { withTheme: true }),
   graphql(gql`
-    query getReportsForChart($tag: [ID], $source: ID!) {
+    query getReportsForChart($tag: [ID]!, $source: ID!) {
       allSentiments(text_Source: $source, text_Tags: $tag, first: 200) {
         edges {
           node {
