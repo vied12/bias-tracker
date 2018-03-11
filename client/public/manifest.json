@@ -8,7 +8,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/",
+  "start_url": "https://www.biastracker.io",
   "display": "standalone",
   "theme_color": "#EF5350",
   "background_color": "#ffffff"
