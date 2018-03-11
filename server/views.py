@@ -15,7 +15,7 @@ import tags.models
 import hashlib
 from django.core.cache import cache
 import json
-from graphene_django.views import GraphQLView
+from graphene_django.views import GraphQLView as OGraphQLView
 
 keys = [
     '__OG_TITLE__',
@@ -132,7 +132,7 @@ def get_cache_key(entry):
     return m.hexdigest()
 
 
-class GraphQLView(GraphQLView):
+class GraphQLView(OGraphQLView):
     def get_response(self, request, entry, *args, **kwargs):
         key = get_cache_key(entry)
         result = cache.get(key)
