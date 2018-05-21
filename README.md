@@ -14,6 +14,9 @@ There's more background on the project here: https://medium.com/@dougiegyro/bias
 
 ## Install the Backend
 
+**REQUIRES** Redis, to store the job runner's tasks queue.
+
+
 ```bash
 # creates a virtual environment
 $ virtualenv env --python python3.6
@@ -43,7 +46,6 @@ $ make runserver
 
 And run the **job runner** which is responsible of all the time consuming tasks.(Ingesting Facebook posts, translation, entities extractions and sentiment analysis).
 
-**REQUIRES** Redis.
 
 ```bash
 $ make worker
