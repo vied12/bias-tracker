@@ -15,14 +15,40 @@ There's more background on the project here: https://medium.com/@dougiegyro/bias
 ## Install the Backend
 
 ```bash
-$ virtualenv env --python python3
+# creates a virtual environment
+$ virtualenv env --python python3.6
+# and loads it
 $ source env/bin/activate
-$ pip install -r requirements.txt
+# installs python dependencies
+$ pip install -r requirements-base.txt
+# download the VADER lexicon
+$ python -c "import nltk ; nltk.download('vader_lexicon')"
+# creates and prepare the database
+$ ./server/manage.py migrate
+# adds a super user who is able to login to the admin interface
+$ ./server/manage.py createsuperuser
 ```
-And launch it
+
+This application requires environment variables :
+- `FACEBOOK_APP_ID` To fetch posts
+- `FACEBOOK_APP_SECRET`
+- `OPEN_CALAIS_KEY` To extract entities
+- `GOOGLE_KEY` to translate into english
+
+Now you can start the backend
+
 ```bash
 $ make runserver
 ```
+
+And run the **job runner** which is responsible of all the time consuming tasks.
+
+```bash
+$ make worker
+```
+
+You can now connect to http://localhost:8000/admin/ and add your first `Source` (http://localhost:8000/admin/core/source/)
+
 ## Install the Frontend
 
 ```bash

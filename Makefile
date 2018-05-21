@@ -5,7 +5,10 @@ install:
 	. env/bin/activate ; pip install -r requirements.txt
 	yarn install
 
-run: graphql_schema runserver
+run: redis runserver
+
+redis:
+	docker run --rm -p 6379:6379 -d redis
 
 runserver:
 	$(MANAGE) runserver
@@ -15,6 +18,9 @@ makemigrations:
 
 shell:
 	$(MANAGE) shell
+
+worker:
+	$(MANAGE) rqworker high default
 
 migrate:
 	$(MANAGE) migrate

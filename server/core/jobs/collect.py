@@ -36,7 +36,9 @@ def collect(source_id, force=False):
         .format(source.facebook_page_id, fields, access_token)
 
     def fetch_url(url, source, page_counter):
-        req = requests.get(url).json()
+        req = requests.get(url)
+        assert req.status_code is 200, req.content
+        req = req.json()
         for post in req['data']:
             if not Text.objects.filter(facebook_id=post.get('id')):
                 if source.language == 'en':

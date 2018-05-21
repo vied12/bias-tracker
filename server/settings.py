@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     'highlights',
     'corsheaders',
     'adminsortable2',
-    'rest_framework',
-    'djoser',
     'graphene_django',
     'django_countries',
     'django_rq',
@@ -58,7 +56,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'middleware.JWTMiddleware',
 ]
 
 ROOT_URLCONF = 'urls'
@@ -144,11 +141,6 @@ FIXTURE_DIRS = (
 
 CORS_ORIGIN_WHITELIST = ['localhost:3000', '127.0.0.1:3000']
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    ),
-}
 
 GRAPHENE = {
     # 'MIDDLEWARE': [

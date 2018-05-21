@@ -22,7 +22,7 @@
             "name": "Text"
           },
           {
-            "name": "Entity"
+            "name": "Tag"
           },
           {
             "name": "SentimentReport"
@@ -55,6 +55,11 @@
         "possibleTypes": null
       },
       {
+        "kind": "SCALAR",
+        "name": "Boolean",
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "TextConnection",
         "possibleTypes": null
@@ -62,11 +67,6 @@
       {
         "kind": "OBJECT",
         "name": "PageInfo",
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Boolean",
         "possibleTypes": null
       },
       {
@@ -81,22 +81,42 @@
       },
       {
         "kind": "OBJECT",
-        "name": "EntityConnection",
+        "name": "TagConnection",
         "possibleTypes": null
       },
       {
         "kind": "OBJECT",
-        "name": "EntityEdge",
+        "name": "TagEdge",
         "possibleTypes": null
       },
       {
         "kind": "OBJECT",
-        "name": "Entity",
+        "name": "Tag",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "TagTagType",
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "TagEntityType",
         "possibleTypes": null
       },
       {
         "kind": "SCALAR",
         "name": "Int",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SourceConnection",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SourceEdge",
         "possibleTypes": null
       },
       {
@@ -111,12 +131,22 @@
       },
       {
         "kind": "OBJECT",
-        "name": "SourceConnection",
+        "name": "SentimentReportConnection",
         "possibleTypes": null
       },
       {
         "kind": "OBJECT",
-        "name": "SourceEdge",
+        "name": "SentimentReportEdge",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "DjangoDebug",
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "DjangoDebugSQL",
         "possibleTypes": null
       },
       {
