@@ -41,7 +41,9 @@ Now you can start the backend
 $ make runserver
 ```
 
-And run the **job runner** which is responsible of all the time consuming tasks.
+And run the **job runner** which is responsible of all the time consuming tasks.(Ingesting Facebook posts, translation, entities extractions and sentiment analysis).
+
+**REQUIRES** Redis.
 
 ```bash
 $ make worker

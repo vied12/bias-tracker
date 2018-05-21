@@ -5,10 +5,10 @@ install:
 	. env/bin/activate ; pip install -r requirements.txt
 	yarn install
 
-run: redis runserver
+run: runserver
 
 redis:
-	docker run --rm -p 6379:6379 -d redis
+	docker start redis-bias-tracker
 
 runserver:
 	$(MANAGE) runserver
