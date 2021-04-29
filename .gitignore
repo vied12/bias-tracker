@@ -2,7 +2,8 @@
 env/
 *.pyc
 *.log
-*.sqlite3
+*.dump
+dump.json
 staticfiles
 
 # dependencies

@@ -1,8 +1,5 @@
-import dj_database_url
 import os
 from settings import *  # noqa
-
-DATABASES['default'] =  dj_database_url.config()  # noqa
 
 MIDDLEWARE = MIDDLEWARE + [  # noqa
     'whitenoise.middleware.WhiteNoiseMiddleware',
