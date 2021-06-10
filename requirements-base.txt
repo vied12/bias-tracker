@@ -1,4 +1,4 @@
-Django==1.11.9
+Django==2.2.24
 whitenoise==3.3.1
 django-cors-headers==2.1.0
 django-countries==5.0
