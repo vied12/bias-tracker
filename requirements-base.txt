@@ -8,7 +8,7 @@ graphene==2.0.1
 graphql-core==2.0
 graphql-relay==0.4.5
 requests==2.18.4
-nltk==3.2.5
+nltk==3.6.3
 django-rq==1.0.1
 redis==2.10.6
 rq==0.10.0
